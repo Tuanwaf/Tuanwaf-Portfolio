@@ -1,0 +1,276 @@
+/* Dark Mode Toggle - Centered in Navbar */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-top: 5px;
+    /* Add spacing from navbar */
+}
+
+/* Switch Container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 65px;
+    /* Slightly wider */
+    height: 34px;
+    /* Adjusted height */
+    vertical-align: middle;
+}
+
+/* Hide Default Checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider Background */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+    padding: 3px;
+    /* Added padding for better fit */
+    display: flex;
+    align-items: center;
+}
+
+/* Circular Slider Button */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icons inside slider */
+.slider i {
+    position: absolute;
+    font-size: 17px;
+    /* Adjusted for better fit */
+    transition: 0.4s;
+}
+
+/* Light Mode: Sun icon on the left */
+.slider .light-icon {
+    left: 8.5px;
+    bottom: 3px;
+    color: #000000;
+}
+
+/* Dark Mode: Moon icon on the right */
+.slider .dark-icon {
+    right: 8.5px;
+    bottom: 3px;
+    color: #ffffff;
+    opacity: 0;
+    /* Initially hidden */
+}
+
+/* Toggle Active - Dark Mode */
+input:checked+.slider {
+    background-color: #222;
+}
+
+/* Move slider to the right */
+input:checked+.slider:before {
+    transform: translateX(30px);
+    background-color: black;
+}
+
+/* Change icon visibility */
+input:checked+.slider .light-icon {
+    opacity: 0;
+    /* Hide sun */
+}
+
+input:checked+.slider .dark-icon {
+    opacity: 1;
+    /* Show moon */
+}
+
+/* Default Light Mode Styles */
+body {
+    background-color: #ffffff;
+    color: #333333;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE STYLES */
+.dark-mode {
+    background-color: #333333;
+    color: #f1f1f1;
+    transition: ease-in-out 0.1s;
+}
+
+/* NAVBAR */
+/* .dark-mode .navbar {
+    background-color: #222 !important;
+    color: white !important;
+} */
+
+.dark-mode .navbar a {
+    color: #f1f1f1 !important;
+}
+
+/* SECTION BACKGROUNDS */
+.dark-mode .service,
+.dark-mode .contact,
+.dark-mode .experience,
+.dark-mode .about {
+    background-color: #333333;
+    transition: ease-in-out 0.3s;
+}
+
+/* LINKS */
+
+.dark-mode .section-header p {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.dark-mode .section-header p::before {
+    position: absolute;
+    content: "";
+    height: 3px;
+    width: 30px;
+    /* Fixed width for consistency */
+    top: 11px;
+    left: -30px;
+    /* Start from the left of the text */
+    background: #ff001e;
+    z-index: 1;
+}
+
+.dark-mode .section-header p::after {
+    position: absolute;
+    content: "";
+    width: 3px;
+    height: 3px;
+    top: 11px;
+    left: 3px;
+    background: #ff0000;
+    z-index: 1;
+}
+
+.dark-mode p {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.dark-mode h3 {
+    color: #ffffff !important;
+}
+
+.dark-mode h2 {
+    color: #ffffff !important;
+}
+
+.dark-mode .service-icon {
+    background: #333333 !important;
+    border-radius: 10px;
+    border-color: #ffffff;
+}
+
+.dark-mode .service .service-icon i {
+    position: relative;
+    font-size: 60px;
+    color: #f20317;
+    transition: ease-in-out 0.2s;
+}
+
+.dark-mode .service-text p {
+    color: #ffffff !important;
+}
+
+.dark-mode .timeline-text {
+    background-color: #201f1f !important;
+}
+
+.dark-mode .timeline-text h4 {
+    color: #ffffff !important;
+}
+
+.dark-mode .timeline-text h2 {
+    color: #ffffff !important;
+}
+
+.dark-mode .timeline-text p {
+    color: #ffffff !important;
+}
+
+.dark-mode a {
+    color: #ffffff !important;
+}
+
+.dark-mode a:hover {
+    color: #ff0000 !important;
+}
+
+.dark-mode .navbar-nav a {
+    color: #ffffff !important;
+}
+
+.dark-mode a:hover {
+    color: #ff0000 !important;
+}
+
+.navbar-nav a {
+    color: #ffffff !important;
+}
+
+.navbar-nav a:hover {
+    color: #000000 !important;
+}
+
+.dark-mode .hero-btn a {
+    color: #ff0000 !important;
+}
+
+.dark-mode .hero-btn a:hover {
+    color: #ffffff !important;
+}
+
+/* CARDS / BOXES */
+.dark-mode .card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.dark-mode .card-title,
+.dark-mode .card-text {
+    color: #ffffff !important;
+}
+
+/* FORM INPUTS */
+.dark-mode input,
+.dark-mode textarea {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #ffffff;
+}
+
+.dark-mode .contact-form-wrapper {
+    color: #000000;
+    background: #201f1f !important;
+}

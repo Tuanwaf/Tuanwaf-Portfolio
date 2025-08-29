@@ -1,0 +1,158 @@
+/*--------------------------------------------------------------
+# Custom Styles
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Education Timeline Enhancement
+--------------------------------------------------------------*/
+.experience .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #007bff; /* A vibrant blue */
+    border: 4px solid #f4f5f8;
+    z-index: 1;
+    transition: background 0.3s;
+}
+
+.experience .timeline-item.right::before {
+    left: auto;
+    right: -16px;
+}
+
+.experience .timeline-item:hover::before {
+    background: #ffc107; /* A warm yellow on hover */
+}
+
+.experience .timeline-text {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.experience .timeline-item:hover .timeline-text {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/*--------------------------------------------------------------
+# Skills Section - Custom Style
+--------------------------------------------------------------*/
+.skill-category-item {
+    background: #f8f9fa; /* Light background */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 30px; /* Space between items */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.skill-category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category-item .service-icon {
+    font-size: 45px;
+    color: #007bff; /* Primary color for icons */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.skill-category-item .service-text h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #343a40;
+    text-align: center;
+}
+
+.skill-category-item .service-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Center the list items */
+}
+
+.skill-category-item .service-text ul li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555555;
+    margin-bottom: 5px;
+}
+
+/* Dark mode adjustments for skills */
+body.dark-mode .skill-category-item {
+    background: #2c2c2c;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .skill-category-item:hover {
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .skill-category-item .service-icon {
+    color: #ffc107; /* Accent color for icons in dark mode */
+}
+
+body.dark-mode .skill-category-item .service-text h3 {
+    color: #f8f9fa;
+}
+
+body.dark-mode .skill-category-item .service-text ul li {
+    color: #cccccc;
+}
+
+
+/*--------------------------------------------------------------
+# Projects Section - New Style
+--------------------------------------------------------------*/
+.project-item {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    height: 100%; /* Ensure cards have equal height */
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-item h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.project-item p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666666;
+    flex-grow: 1; /* Allow paragraph to take available space */
+}
+
+/* Dark mode adjustments for projects */
+body.dark-mode .project-item {
+    background: #333333;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .project-item h3 {
+    color: #ffc107;
+}
+
+body.dark-mode .project-item p {
+    color: #cccccc;
+}
