@@ -1,535 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Wafiq — Developer, AI Trainer & Game Maker</title>
+    <meta name="description" content="Portfolio of Tuan Ahmad Wafiq — web & mobile developer, AI trainer at Knowledgecom, and maker of BajetBro, Island of Kail and Noctudite." />
+    <meta name="theme-color" content="#FFF8F1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#16121E" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Wafiq" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/icons/favicon-64.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta property="og:title" content="Wafiq — Developer, AI Trainer & Game Maker" />
+    <meta property="og:description" content="Apps, games and AI training by Tuan Ahmad Wafiq." />
+    <meta property="og:image" content="https://tuanwaf.github.io/Tuanwaf-Portfolio/img/og.jpg" />
+    <meta property="og:type" content="website" />
+    <script>
+      // Apply the saved theme before first paint so there is no flash.
+      try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    </script>
+  </head>
+  <body class="is-loading">
+    <a class="skip" href="#main">Skip to content</a>
 
-<head>
-    <meta charset="utf-8">
-    <title>Tuanwaf Portfolio</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free Website Template" name="keywords">
-    <meta content="Free Website Template" name="description">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS Libraries -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/dark.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-</head>
-
-<body data-spy="scroll" data-target=".navbar" data-offset="51" class="dark-mode">
-    <!-- Nav Bar Start -->
-    <div class="navbar navbar-expand-lg bg-light navbar-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand d-flex align-items-center">
-                <img src="img/icon.png" alt="Logo" width="40" height="100" class="me-2">
-                Portfolio
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav ml-auto">
-                    <a href="#home" class="nav-item nav-link active">Home</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
-                    <a href="#service" class="nav-item nav-link">Service</a>
-                    <a href="#experience" class="nav-item nav-link">Experience</a>
-                    <a href="#education" class="nav-item nav-link">Education</a>
-                    <!-- <a href="#skills" class="nav-item nav-link">Skills</a> -->
-                    <a href="#projects" class="nav-item nav-link">Projects</a>
-                    <!-- Minimalist Dark Mode Toggle -->
-                    <div class="dark-mode-toggle">
-                        <label class="switch">
-                            <input type="checkbox" id="darkModeToggle">
-                            <span class="slider round">
-                                <i class="bi bi-brightness-high light-icon"></i> <!-- ☀️ Sun icon (Light Mode) -->
-                                <i class="bi bi-moon dark-icon"></i> <!-- 🌙 Moon icon (Dark Mode) -->
-                            </span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Nav Bar End -->
-
-
-    <!-- Hero Start -->
-    <div class="hero" id="home">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-12 col-md-6">
-                    <div class="hero-content">
-                        <div class="hero-text">
-                            <p>I'm</p>
-                            <h1>Tuan Ahmad Wafiq</h1>
-                            <h2></h2>
-                            <div class="typed-text">Web Designer, Web Development, Machine Learning, Software
-                                Development
-                            </div>
-                        </div>
-                        <div class="hero-btn">
-                            <a class="btn" href="docs/TuanwafResume.pdf" download>📄 Download CV</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 text-center text-md-end">
-                    <div class="hero-image">
-                        <img src="img/tuanwaf-min.png" alt="Hero Image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Hero End -->
-
-
-
-    <!-- About Start -->
-    <div class="about wow fadeInUp" data-wow-delay="0.1s" id="about">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-lg-6 py-5">
-                    <div class="about-img">
-                        <img src="img/tuanwafbg3.JPG" alt="Image">
-                    </div>
-                </div>
-                <div class="col-lg-6 py-5">
-                    <div class="about-content">
-                        <div class="section-header text-left">
-                            <p>Learn About Me</p>
-                            <h2>Computer Science Graduate</h2>
-                        </div>
-                        <div class="about-text">
-                            <p>
-                                I'm Tuan Ahmad Wafiq, a passionate and dedicated Computer Science graduate from UiTM
-                                Kuala
-                                Terengganu,
-                                with a strong foundation in web development, machine learning, and software engineering.
-                                Throughout my academic journey, I have consistently excelled, achieving a 3.70 CGPA and
-                                earning multiple
-                                academic awards, including the Vice Chancellor Award and Best Student Award.
-                            </p>
-                            <p>
-                                With hands-on experience in web development, I have built projects such as an
-                                interactive
-                                educational platform (Edublock),
-                                an E-Ramadhan website for mosque programs, and a video game recommendation system using
-                                machine learning.
-                                My technical expertise spans HTML, CSS, JavaScript, Python, PHP, and frameworks like
-                                Flutter
-                                and Angular.
-                            </p>
-                        </div>
-                        <a class="btn" href="#experience">My Experience</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-
-    <!-- Service Start -->
-    <div class="service" id="service">
-        <div class="container">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>What I Do</p>
-                <h2>Professional & High-Quality Services</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fa fa-laptop"></i>
-                        </div>
-                        <div class="service-text">
-                            <h3>Web Design</h3>
-                            <p>
-                                I create modern, responsive, and user-friendly website designs using HTML, CSS, and
-                                JavaScript. My focus is on delivering intuitive interfaces.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fa fa-laptop-code"></i>
-                        </div>
-                        <div class="service-text">
-                            <h3>Web Development</h3>
-                            <p>
-                                I develop fully functional and interactive websites, integrating backend solutions with
-                                PHP and MySQL to ensure seamless performance and security.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="service-text">
-                            <h3>Machine Learning</h3>
-                            <p>
-                                With experience in collaborative filtering and neural networks, I build intelligent
-                                systems, recommendation engines and recognition system.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="service-item">
-                        <div class="service-icon">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        <div class="service-text">
-                            <h3>Software & App Development</h3>
-                            <p>
-                                I develop mobile and web applications using Flutter, Angular, and MVC frameworks,
-                                ensuring
-                                high performance, scalability, and seamless user interaction.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Service End -->
-
-
-    <!-- Experience Start -->
-    <div class="experience" id="experience">
-        <div class="container">
-            <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>My Resume</p>
-                <h2>Working Experience</h2>
-            </header>
-            <div class="timeline">
-                <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                    <div class="timeline-text">
-                        <div class="timeline-date">Sep 2022 - Feb 2023</div>
-                        <h2>Web Developer Intern</h2>
-                        <h4>JAZRO Robotic Academy</h4>
-                        <p>
-                            Designed and developed an educational website using HTML, CSS, and JavaScript.
-                            Created an interactive coding platform that allowed users to control a robot (EduBot)
-                            through Blockly programming.
-                        </p>
-                    </div>
-                </div>
-                <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
-                    <div class="timeline-text">
-                        <div class="timeline-date">2025 - Present</div>
-                        <h2>Programming Intern</h2>
-                        <h4>Tamarix Onesolutions Sdn. Bhd.</h4>
-                        <p>
-                            Responsible for maintaining and updating client websites.
-                            Ensured site functionality, optimized performance, and implemented improvements based on
-                            client
-                            needs.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Job Experience End -->
-
-    <!-- Education Start -->
-    <div class="experience" id="education">
-        <div class="container">
-            <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>My Education</p>
-                <h2>Educational Background</h2>
-            </header>
-            <div class="timeline">
-                <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                    <div class="timeline-text">
-                        <div class="timeline-date">2023 - 2025</div>
-                        <h2>Bachelor of Computer Science (Honours)</h2>
-                        <h4>UiTM Kuala Terengganu, Terengganu</h4>
-                        <p>Achievements: Dean’s List for 3 out of 4 semesters, CGPA: 3.70</p>
-                    </div>
-                </div>
-                <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
-                    <div class="timeline-text">
-                        <div class="timeline-date">2021 - 2023</div>
-                        <h2>Diploma of Computer Science</h2>
-                        <h4>UiTM Machang, Kelantan</h4>
-                        <p>Achievement: Vice Chancellor Award, Best Student Award, CGPA: 3.85</p>
-                    </div>
-                </div>
-                <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                    <div class="timeline-text">
-                        <div class="timeline-date">2015 - 2019</div>
-                        <h2>Malaysian Certificate of Education (SPM)</h2>
-                        <h4>SMK (A) Tok Bachok Bachok, Kelantan</h4>
-                        <p>Achievement: SPM Result: 8A, 2B, 1C</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Education End -->
-
-    <!-- Skills Start -->
-    <!-- <div class="service" id="skills">
-        <div class="container">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>My Skills</p>
-                <h2>Technical Expertise</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Programming Languages</h3>
-                            <ul>
-                                <li>Python</li>
-                                <li>Java</li>
-                                <li>JavaScript</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Web Development</h3>
-                            <ul>
-                                <li>HTML</li>
-                                <li>CSS</li>
-                                <li>PHP</li>
-                                <li>React.js</li>
-                                <li>Node.js</li>
-                                <li>Express.js</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Database Management</h3>
-                            <ul>
-                                <li>MySQL</li>
-                                <li>MongoDB</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Machine Learning</h3>
-                            <ul>
-                                <li>Collaborative Filtering</li>
-                                <li>Convolutional Neural Networks (CNN)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.8s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Frameworks & Libraries</h3>
-                            <ul>
-                                <li>MERN Stack</li>
-                                <li>MVC</li>
-                                <li>Flutter</li>
-                                <li>Angular</li>
-                                <li>TensorFlow</li>
-                                <li>Pandas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="1.0s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Tools & Technologies</h3>
-                            <ul>
-                                <li>Git</li>
-                                <li>Visual Studio Code</li>
-                                <li>Firebase</li>
-                                <li>Beyond Compare</li>
-                                <li>Mongoose</li>
-                                <li>Postman</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="1.2s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Languages</h3>
-                            <ul>
-                                <li>Malay (Native)</li>
-                                <li>English (Fluent)</li>
-                                <li>Arabic (Advanced)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="1.4s">
-                    <div class="skill-category-item">
-                        <div class="service-text">
-                            <h3>Strengths</h3>
-                            <ul>
-                                <li>Problem-solving</li>
-                                <li>Responsible</li>
-                                <li>Reliable</li>
-                                <li>Hardworking</li>
-                                <li>Effective in team environments</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Skills End -->
-
-    <!-- Projects Start -->
-    <div class="service" id="projects">
-        <div class="container">
-            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>My Projects</p>
-                <h2>Computer Projects</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.0s">
-                    <div class="project-item">
-                        <h3>Edublock Website</h3>
-                        <ul>
-                            <li>Designed and implemented an interactive educational platform during an internship,
-                                enabling
-                                children and young programmers to learn coding concepts using Blockly.</li>
-                            <li>Developed functionalities using JavaScript to control a robot, EduBot, through coding
-                                challenges and convert visual Blockly code into JavaScript.</li>
-                            <li>Built a responsive and user-friendly interface using HTML and CSS, ensuring an engaging
-                                and
-                                seamless user experience.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="project-item">
-                        <h3>Video Game Recommendation System Using Collaborative Filtering</h3>
-                        <ul>
-                            <li>Developed a personalized video game recommendation system utilizing Non-Negative Matrix
-                                Factorization (NMF) for collaborative filtering to analyze user preferences and
-                                behaviors.
-                            </li>
-                            <li>Implemented efficient backend processing to generate and deliver recommendations based
-                                on
-                                user interaction data.</li>
-                            <li>Designed and tested a prototype interface to showcase recommendations and improve user
-                                experience.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="project-item">
-                        <h3>Real-Time Sign Language Recognition System</h3>
-                        <ul>
-                            <li>Developed a system to translate sign language gestures into text using machine learning
-                                and
-                                computer vision.</li>
-                            <li>Utilized OpenCV and MediaPipe for hand landmark detection and trained a Random Forest
-                                classifier with Scikit-Learn for gesture recognition.</li>
-                            <li>Integrated real-time video processing to dynamically display recognized gestures as
-                                text.
-                            </li>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Projects End -->
-
-    <!-- Footer Start -->
-    <div class="footer wow fadeIn" data-wow-delay="0.3s">
-        <div class="container-fluid">
-            <div class="container">
-                <div class="footer-info">
-                    <h2>Tuan Ahmad Wafiq</h2>
-                    <h3>Cyberjaya, Selangor, Malaysia</h3>
-                    <div class="footer-menu">
-                        <p>+6016-4952745</p>
-                        <p>tuanwaf02@gmail.com</p>
-                    </div>
-                    <div class="footer-social">
-                        <!-- <a href=""><i class="fab fa-twitter"></i></a> -->
-                        <a href="https://www.facebook.com/share/161H4vDF2o/?mibextid=wwXIfr" target="_blank"
-                            rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/tuanwafiq_?igsh=NWhxZWR2NnZ3c3hs&utm_source=qr"
-                            target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@tuanwafiq_?_t=ZS-8unpkcQkI5P&_r=1" target="_blank"
-                            rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="https://www.linkedin.com/in/tuan-ahmad-wafiq-7ab842356/" target="_blank"
-                            rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://github.com/Tuanwaf" target="_blank" rel="noopener noreferrer"><i
-                                class="fa-brands fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="container copyright">
-                <p>&copy; <a href="#">Tuanwaf Portfolio</a>, All Right Reserved | Designed By <a
-                        href="https://htmlcodex.com">HTML Codex</a></p>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-
-
-    <!-- Back to top button -->
-    <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-
-    <!-- Pre Loader -->
-    <div id="loader" class="show">
-        <div class="loader"></div>
+    <!-- Preloader -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__bars"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="loader__inner">
+        <svg class="loader__logo" data-logo></svg>
+        <div class="loader__count"><span data-count>0</span><sup>%</sup></div>
+        <p class="loader__line">warming up the pixels…</p>
+      </div>
     </div>
 
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/typed/typed.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <!-- Nav -->
+    <header class="nav">
+      <a class="nav__brand" href="#top" data-magnetic aria-label="Back to top">
+        <svg class="nav__logo" data-logo></svg>
+        <span class="nav__word">wafiq<em>.dev</em></span>
+      </a>
+      <div class="nav__status">
+        <span class="pulse"></span>
+        <span>Open to collabs</span>
+        <span class="nav__clock" data-clock>KUL --:--</span>
+      </div>
+      <div class="nav__actions">
+        <button class="nav__theme" data-theme-toggle aria-label="Toggle dark mode" data-magnetic>
+          <svg viewBox="0 0 24 24" class="i-sun"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          <svg viewBox="0 0 24 24" class="i-moon"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+        </button>
+        <button class="nav__menu" data-menu-toggle aria-expanded="false" aria-controls="menu" data-magnetic>
+          <span class="nav__menu-label">Menu</span>
+          <span class="burger"><i></i><i></i></span>
+        </button>
+      </div>
+    </header>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <nav class="menu" id="menu" aria-hidden="true">
+      <div class="menu__bg"><i></i><i></i><i></i></div>
+      <ol class="menu__list">
+        <li><a href="#work" data-menu-link><small>01</small>Playground</a></li>
+        <li><a href="#trainer" data-menu-link><small>02</small>Trainer</a></li>
+        <li><a href="#journey" data-menu-link><small>03</small>Journey</a></li>
+        <li><a href="#creds" data-menu-link><small>04</small>Credentials</a></li>
+        <li><a href="#skills" data-menu-link><small>05</small>Skills</a></li>
+        <li><a href="#contact" data-menu-link><small>06</small>Say hi</a></li>
+      </ol>
+      <div class="menu__foot">
+        <button class="btn btn--ghost" data-install hidden>Install this portfolio as an app</button>
+        <a href="https://github.com/Tuanwaf" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/tuan-ahmad-wafiq-7ab842356/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </nav>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/dark.js"></script>
-    <script src="js/custom.js"></script>
-</body>
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero__meta">
+          <span>Portfolio ©2026</span>
+          <span>Cyberjaya, Malaysia</span>
+          <span>Developer / Trainer / Game maker</span>
+        </div>
+        <h1 class="hero__title" aria-label="Tuan Ahmad Wafiq">
+          <span class="hero__line hero__line--sm" data-split>Tuan Ahmad</span>
+          <span class="hero__line hero__line--xl" data-wave>Wafiq</span>
+        </h1>
+        <div class="hero__bottom">
+          <p class="hero__intro">
+            I <span class="rotator" data-rotator><b>build apps</b><b>make games</b><b>teach AI</b><b>ship PWAs</b></span><br />
+            that feel <em>soft</em>, <em>playful</em> &amp; actually useful.
+          </p>
+          <a class="badge" href="#work" aria-label="See my work" data-magnetic>
+            <svg viewBox="0 0 200 200" class="badge__ring"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+              <text><textPath href="#circ">SCROLL TO PLAY ✦ DEVELOPER ✦ AI TRAINER ✦ GAME MAKER ✦ </textPath></text></svg>
+            <span class="badge__arrow">↓</span>
+          </a>
+        </div>
+        <div class="hero__hint">drag · click the logo</div>
+      </section>
 
+      <!-- Crossing tapes -->
+      <div class="tapes" aria-hidden="true">
+        <div class="tape tape--a"><div class="tape__track" data-tape>Web &amp; mobile developer ✦ AI+ certified trainer ✦ Godot game maker ✦ PWA enjoyer ✦ HRD Corp TTT ✦ </div></div>
+        <div class="tape tape--b"><div class="tape__track" data-tape="-1">Build ✦ Teach ✦ Play ✦ Repeat ✦ Build ✦ Teach ✦ Play ✦ Repeat ✦ </div></div>
+      </div>
+
+      <!-- ABOUT -->
+      <section class="about section" id="about">
+        <header class="sec-head">
+          <span class="sec-head__no">00 — hello</span>
+          <h2 class="sec-title" data-reveal>Hi, I’m Wafiq. I <span class="serif">teach AI</span> by day and build <span class="serif">apps &amp; games</span> by night.</h2>
+        </header>
+        <div class="bento">
+          <article class="bento__card bento__photo" data-tilt>
+            <div class="photo-blob"></div>
+            <img src="/img/wafiq-cutout.webp" alt="Wafiq in a black baju Melayu with songket samping" loading="lazy" width="672" height="1600" />
+            <div class="sticker s1" data-drag>CS grad 🎓</div>
+            <div class="sticker s2" data-drag>AI trainer</div>
+            <div class="sticker s3" data-drag>Game dev 🎮</div>
+            <div class="sticker s4" data-drag>drag us ✦</div>
+          </article>
+          <article class="bento__card bento__bio">
+            <p class="kicker">About</p>
+            <p>Computer Science graduate from <b>UiTM</b> who has shipped web and mobile apps with React Native, Laravel and the MERN stack across internships and an apprenticeship.</p>
+            <p>Today I’m a <b>Trainer / IT Consultant at Knowledgecom</b>, turning complex AI ideas into practical workplace skills — and after hours I make PWAs and Godot games that people actually play.</p>
+          </article>
+          <article class="bento__card bento__now">
+            <p class="kicker">Currently</p>
+            <p class="big">Trainer / IT Consultant</p>
+            <p>Knowledgecom Corporation · since Jan 2026</p>
+            <span class="chip chip--live"><span class="pulse"></span>HRD Corp TTT · accreditation pending</span>
+          </article>
+          <article class="bento__card bento__stat t-lilac"><span class="num" data-count-to="3.70" data-decimals="2">0</span><span>Degree CGPA</span></article>
+          <article class="bento__card bento__stat t-mint"><span class="num" data-count-to="3.85" data-decimals="2">0</span><span>Diploma CGPA</span></article>
+          <article class="bento__card bento__stat t-peach"><span class="num"><span data-count-to="3">0</span>/4</span><span>Dean’s List semesters</span></article>
+          <article class="bento__card bento__award t-butter"><span class="award-ico">🏆</span><p>Vice-Chancellor’s Award<br />&amp; Best Student Award</p></article>
+          <article class="bento__card bento__langs">
+            <p class="kicker">Languages</p>
+            <ul class="langs">
+              <li><span>Malay</span><i style="--v: 1"></i><small>Native</small></li>
+              <li><span>English</span><i style="--v: .85"></i><small>Fluent</small></li>
+              <li><span>Arabic</span><i style="--v: .65"></i><small>Advanced</small></li>
+            </ul>
+          </article>
+          <article class="bento__card bento__quote">
+            <p class="serif">“Help people and organisations understand, adopt and use AI responsibly — by turning complex ideas into practical, everyday work.”</p>
+            <span class="kicker">— my mission as a trainer</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- PLAYGROUND -->
+      <section class="work" id="work">
+        <div class="work__pin">
+          <div class="work__track" data-track>
+            <div class="panel panel--intro">
+              <span class="sec-head__no">01 — personal projects</span>
+              <h2 class="mega"><span class="outline">PLAY</span><span>GROUND</span></h2>
+              <p class="work__lede">Things I build for fun that turned into things people use. Every one is live — <b>press play</b>, or try them right here.</p>
+              <div class="work__scroll-hint"><span>scroll</span><i></i></div>
+            </div>
+            <div data-projects class="panels"></div>
+            <div class="panel panel--lab" data-lab></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRAINER -->
+      <section class="trainer section" id="trainer">
+        <div class="trainer__inner">
+          <header class="trainer__head">
+            <span class="sec-head__no">02 — the other hat</span>
+            <h2 class="mega mega--trainer"><span>I also</span> <span class="serif">teach.</span></h2>
+            <p class="trainer__lede">As a <b>Trainer / IT Consultant at Knowledgecom</b>, I run AI literacy and Generative AI programmes for internal staff, corporate teams and public participants — hands-on, jargon-free and built around real work.</p>
+          </header>
+          <div class="trainer__grid">
+            <figure class="polaroid" data-tilt>
+              <img src="/img/wafiq-formal.webp" alt="Formal portrait of Wafiq" loading="lazy" width="327" height="415" />
+              <figcaption>Trainer mode: ON</figcaption>
+            </figure>
+            <div class="orbit" aria-label="Training topics">
+              <div class="orbit__core"><svg data-logo></svg></div>
+              <div class="orbit__ring" data-orbit></div>
+            </div>
+            <div class="ttt">
+              <div class="ttt__seal">HRD<br />Corp</div>
+              <div>
+                <p class="kicker">Professional development</p>
+                <h3>Train-the-Trainer (TTT)</h3>
+                <p>Completed August 2026. Awaiting assessment results &amp; accreditation.</p>
+                <span class="chip chip--live"><span class="pulse"></span>Accreditation pending</span>
+              </div>
+            </div>
+          </div>
+          <div class="programmes" data-programmes></div>
+          <div class="trainer__foot">
+            <div class="audience">
+              <p class="kicker">Who I’ve trained</p>
+              <ul data-audiences></ul>
+            </div>
+            <a class="tool-card" data-tool target="_blank" rel="noopener" data-cursor="Open"></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOURNEY -->
+      <section class="journey section" id="journey">
+        <header class="sec-head">
+          <span class="sec-head__no">03 — journey</span>
+          <h2 class="sec-title" data-reveal>From <span class="serif">Kelantan</span> classrooms to <span class="serif">corporate</span> training rooms.</h2>
+        </header>
+        <div class="timeline">
+          <svg class="timeline__line" preserveAspectRatio="none" viewBox="0 0 10 100"><path d="M5 0 V100" /></svg>
+          <ol data-journey></ol>
+        </div>
+      </section>
+
+      <!-- CREDENTIALS -->
+      <section class="creds section" id="creds">
+        <header class="sec-head sec-head--split">
+          <span class="sec-head__no">04 — credentials</span>
+          <h2 class="sec-title" data-reveal>Collect them <span class="serif">all.</span></h2>
+          <p class="sec-sub">Tilt the cards. Three AI CERTs® certifications, HRD Corp TTT on the way, plus the workshops that got me here.</p>
+        </header>
+        <div class="holo-grid" data-certs></div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="skills section" id="skills">
+        <header class="sec-head">
+          <span class="sec-head__no">05 — toolbox</span>
+          <h2 class="sec-title" data-reveal>A little bit of <span class="serif">everything,</span> a lot of shipping.</h2>
+        </header>
+        <div class="skills__wrap">
+          <div class="sphere" data-sphere aria-hidden="true"></div>
+          <div class="skills__lists" data-skills></div>
+        </div>
+      </section>
+
+      <!-- MORE -->
+      <section class="more section" id="more">
+        <header class="sec-head">
+          <span class="sec-head__no">06 — more builds</span>
+          <h2 class="sec-title" data-reveal>Uni, internships &amp; <span class="serif">side quests.</span></h2>
+        </header>
+        <ul class="more__list" data-more></ul>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact" id="contact">
+        <p class="sec-head__no">07 — say hi</p>
+        <h2 class="contact__title" data-bounce>Let’s build something</h2>
+        <h2 class="contact__title contact__title--serif serif">(or run a workshop)</h2>
+        <button class="contact__mail" data-copy="tuanwaf02@gmail.com" data-magnetic data-cursor="Copy">
+          <span class="contact__mail-text">tuanwaf02@gmail.com</span>
+          <span class="contact__mail-tip" data-copy-tip>click to copy</span>
+        </button>
+        <div class="contact__links">
+          <a class="btn" href="https://www.linkedin.com/in/tuan-ahmad-wafiq-7ab842356/" target="_blank" rel="noopener" data-magnetic>LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/Tuanwaf" target="_blank" rel="noopener" data-magnetic>GitHub ↗</a>
+          <a class="btn" href="mailto:wafiq@knowledgecom.tech" data-magnetic>Training enquiries ✉</a>
+          <a class="btn btn--solid" href="docs/Wafiq-Resume.pdf" target="_blank" rel="noopener" data-magnetic>Resume (PDF) ↓</a>
+        </div>
+        <footer class="foot">
+          <span>© 2026 Tuan Ahmad Wafiq</span>
+          <span>Built with three.js, GSAP &amp; too much teh tarik</span>
+          <a href="#top" data-magnetic>Back to top ↑</a>
+        </footer>
+      </section>
+    </main>
+
+    <!-- Live preview modal -->
+    <div class="modal" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Live preview">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__frame">
+        <div class="modal__bar">
+          <span class="modal__dots"><i></i><i></i><i></i></span>
+          <span class="modal__title" data-modal-title></span>
+          <a class="modal__open" data-modal-open target="_blank" rel="noopener">Open in new tab ↗</a>
+          <button class="modal__close" data-modal-close aria-label="Close preview">✕</button>
+        </div>
+        <div class="modal__screen" data-modal-screen></div>
+      </div>
+    </div>
+
+    <div class="toast" data-toast role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
