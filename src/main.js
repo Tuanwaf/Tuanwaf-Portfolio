@@ -615,6 +615,10 @@ menuBtn.addEventListener('click', () => (document.documentElement.classList.cont
 $$('[data-menu-link]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); closeMenu(() => scrollToHash(a.getAttribute('href'))); }));
 $('[data-menu-close]').addEventListener('click', () => closeMenu());
 
+/* ───────── header: transparent at the top, solid once you scroll ───────── */
+const nav = $('.nav');
+lenis.on('scroll', ({ scroll }) => nav.classList.toggle('is-scrolled', scroll > 24));
+
 /* ───────── floating back-to-top ───────── */
 (function toTop() {
   const btn = $('[data-totop]');
