@@ -211,7 +211,7 @@ function intro() {
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
   tl.from($$('.ch', heroSm), { yPercent: 120, duration: 1.2, stagger: 0.03 })
     .from(xlChars, { yPercent: 110, rotate: 8, duration: 1.4, stagger: 0.06 }, '<0.1')
-    .from('.hero__meta span', { y: 20, opacity: 0, stagger: 0.08, duration: 1 }, '<0.3')
+    .from('.hero__meta span, .hero__role', { y: 20, opacity: 0, stagger: 0.08, duration: 1 }, '<0.3')
     .from('.hero__intro', { y: 30, opacity: 0, duration: 1 }, '<0.2')
     .from('.badge', { scale: 0, rotate: -120, duration: 1.4, ease: 'back.out(1.6)' }, '<')
     .from('.nav > *', { y: -30, opacity: 0, stagger: 0.08, duration: 1 }, '<')
