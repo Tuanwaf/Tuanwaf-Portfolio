@@ -45,6 +45,9 @@
 /* ───────────────────────── base ───────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* Vertical scrolling only: no sideways pan or rubber-band, so horizontal drags reach the 3D logo. */
+html, body { overflow-x: clip; overscroll-behavior-x: none; }
+body { touch-action: pan-y pinch-zoom; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 body {
@@ -185,11 +188,25 @@ main, .nav { position: relative; z-index: 2; }
 .menu-open .burger i:first-child { transform: translateY(2.8px) rotate(45deg); }
 .menu-open .burger i:last-child { transform: translateY(-2.8px) rotate(-45deg); }
 @media (max-width: 760px) {
-  .nav__status { display: none; }
+  /* Phones: logo left, "open to collabs" pill beside the menu button; the theme toggle moves into the menu */
+  .nav__status { margin-left: auto; padding: 7px 10px; gap: 6px; font-size: 0.62rem; letter-spacing: -0.01em; white-space: nowrap; }
+  .nav__status .pulse { width: 7px; height: 7px; }
+  .nav__clock { padding-left: 7px; }
+  .nav__theme { display: none; }
   .nav__menu-label { display: none; }
   .nav__menu { width: 44px; padding: 0; }
   .nav__word em { display: none; }
 }
+@media (max-width: 399px) { .nav__word { display: none; } }
+.menu__theme { display: none; }
+.menu__theme .t-light { display: none; }
+:root[data-theme='dark'] .menu__theme .t-dark { display: none; }
+:root[data-theme='dark'] .menu__theme .t-light { display: inline; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .menu__theme .t-dark { display: none; }
+  :root:not([data-theme='light']) .menu__theme .t-light { display: inline; }
+}
+@media (max-width: 760px) { .menu__theme { display: inline-flex; } }
 
 /* menu: dropdown panel */
 .menu { position: fixed; inset: 0; z-index: 115; visibility: hidden; pointer-events: none; }
@@ -243,16 +260,12 @@ main, .nav { position: relative; z-index: 2; }
   position: relative;
 }
 .hero__meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
-.hero__status { display: none !important; align-items: center; gap: 8px; }
-.hero__status b { font-weight: 500; color: var(--ink-2); border-left: 1px solid var(--line); padding-left: 8px; }
 @media (max-width: 760px) {
-  /* Phones: status centred on top, portfolio | location, then the role line centred */
-  .hero__meta { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: 'status status' 'folio place' 'role role'; gap: 8px; font-size: 0.66rem; }
+  /* Phones: portfolio far left + location far right, role below portfolio */
+  .hero__meta { display: grid; grid-template-columns: auto auto; grid-template-areas: 'folio place' 'role role'; justify-content: space-between; gap: 8px; font-size: 0.64rem; }
   .hero__meta span:nth-child(1) { grid-area: folio; justify-self: start; }
   .hero__meta span:nth-child(2) { grid-area: place; justify-self: end; }
-  .hero__meta span:nth-child(3) { grid-area: role; justify-self: center; }
-  .hero__meta .hero__status { grid-area: status; justify-self: center; }
-  .hero__status { display: inline-flex !important; }
+  .hero__meta span:nth-child(3) { grid-area: role; justify-self: start; }
 }
 .hero__meta span { padding: 7px 12px; border-radius: 99px; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: var(--ink); }
 .hero__main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: 24px; min-height: 0; }

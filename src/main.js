@@ -154,10 +154,21 @@ gsap.ticker.add((t) => lenis.raf(t * 1000));
 gsap.ticker.lagSmoothing(0);
 lenis.stop();
 
+// Touch devices already scroll natively (Lenis only smooths the wheel), so hand long jumps to the
+// browser's own smooth scroll there: it runs on the compositor and stays smooth on iPhone, where a
+// JS-driven scroll competing with the 3D render stutters.
+function smoothTo(target, duration = 1.6) {
+  if (reduced) return target === 0 ? scrollTo(0, 0) : target.scrollIntoView();
+  if (!finePointer) {
+    const top = target === 0 ? 0 : target.getBoundingClientRect().top + scrollY;
+    return window.scrollTo({ top, behavior: 'smooth' });
+  }
+  lenis.scrollTo(target, { offset: 0, duration });
+}
 function scrollToHash(hash) {
   const el = hash === '#top' ? 0 : $(hash);
   if (el === null) return;
-  lenis.scrollTo(el, { offset: 0, duration: reduced ? 0 : 1.6 });
+  smoothTo(el);
 }
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href^="#"]');
@@ -629,7 +640,7 @@ lenis.on('scroll', ({ scroll }) => nav.classList.toggle('is-scrolled', scroll > 
   });
   btn.addEventListener('click', () => {
     gsap.fromTo(btn, { y: 0 }, { y: -40, duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' });
-    lenis.scrollTo(0, { duration: reduced ? 0 : 1.8 });
+    smoothTo(0, 1.8);
   });
 })();
 
@@ -643,14 +654,14 @@ function syncMeta() {
   metaTheme.forEach((m) => m.setAttribute('content', c));
 }
 syncMeta();
-$('[data-theme-toggle]').addEventListener('click', () => {
+$$('[data-theme-toggle]').forEach((b) => b.addEventListener('click', () => {
   const next = currentTheme() === 'dark' ? 'light' : 'dark';
   document.documentElement.dataset.theme = next;
   try { localStorage.setItem('theme', next); } catch {}
   syncMeta();
   scene?.setDark(next === 'dark');
   gsap.fromTo('[data-theme-toggle] svg', { rotate: -120, scale: 0.4 }, { rotate: 0, scale: 1, duration: 0.8, ease: 'back.out(2)' });
-});
+}));
 
 /* ───────── clock ───────── */
 const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit' });
