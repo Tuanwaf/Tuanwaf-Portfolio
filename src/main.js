@@ -10,7 +10,7 @@ import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 import { registerSW } from 'virtual:pwa-register';
 
-import { projects, lab, training, journey, certs, skills, more } from './data.js';
+import { projects, training, journey, certs, skills, more } from './data.js';
 import { LOGO_PATH, LOGO_VIEWBOX } from './logo-path.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -74,39 +74,61 @@ $('[data-projects]').innerHTML = projects
   )
   .join('');
 
-$('[data-lab]').innerHTML = `
-  <span class="lab__tape">WORK IN PROGRESS</span>
-  <span class="lab__flask" aria-hidden="true">🧪</span>
-  <span class="sec-head__no">04 — ${lab.kind}</span>
-  <h3>${lab.name}</h3>
-  <p>${lab.blurb}</p>
-  <div class="proj__stack" style="--on-pastel:var(--ink)">${lab.stack.map((s) => `<span>${s}</span>`).join('')}</div>`;
-
-$('[data-programmes]').innerHTML = training.programmes
-  .map((p, i) => `<article class="prog t-${p.color}"><span class="prog__no">0${i + 1}</span><span class="prog__tag">${p.tag}</span><h3>${p.title}</h3><p>${p.text}</p></article>`)
-  .join('');
-$('[data-orbit]').innerHTML = training.topics.map((t, i) => `<span class="orbit__chip" style="--c:${toneVar(TONES[i % 6])}">${t}</span>`).join('');
+$('[data-programmes]').innerHTML =
+  training.programmes
+    .map(
+      (p, i) => `<article class="tcard prog" style="--acc:${toneVar(p.color)}">
+        <div class="prog__top"><span class="prog__tag">${p.tag}</span><span class="prog__no">0${i + 1}</span></div>
+        <h3>${p.title}</h3><p>${p.text}</p>
+        <ul>${p.points.map((x) => `<li>${x}</li>`).join('')}</ul>
+      </article>`,
+    )
+    .join('') +
+  `<article class="tcard ttt">
+    <svg class="ttt__seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="seal" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#seal">HRD CORP ✦ CERTIFIED TRAINER ✦ </textPath></text></svg>
+    <p class="kicker">Professional certification</p>
+    <h3>HRD Corp Train-the-Trainer</h3>
+    <p>Certified through the HRD Corp TTT programme in August 2026.</p>
+    <div class="ttt__status">
+      <span><i class="ok">✓</i>TTT certified · Aug 2026</span>
+      <span><i class="wait"></i>Accreditation in progress</span>
+    </div>
+  </article>`;
+$('[data-topics]').innerHTML = training.topics.map((t, i) => `<span style="--c:${toneVar(TONES[i % 6])}">${t}</span>`).join('');
 $('[data-audiences]').innerHTML = training.audiences.map((a, i) => `<li><small>0${i + 1}</small>${a}</li>`).join('');
 const tool = $('[data-tool]');
 tool.href = training.tool.url;
 tool.innerHTML = `<span class="arrow">↗</span><span class="kicker" style="color:inherit">Built for my trainees</span><h3>${training.tool.name}</h3><p>${training.tool.text}</p>`;
 
-const typeTone = { work: 'lilac', edu: 'mint', cert: 'butter' };
+const typeTone = { work: ['lilac', 'sky', 'peach', 'rose'], edu: ['mint'], cert: ['butter'] };
 const typeName = { work: 'Work', edu: 'Education', cert: 'Certification' };
+let workN = 0;
 $('[data-journey]').innerHTML = journey
-  .map(
-    (j) => `<li class="tl t-${typeTone[j.type]}">
-      <div class="tl__when">${j.when}<small>${typeName[j.type]}</small></div>
-      <div class="tl__card"><h3>${j.role}</h3><p class="tl__org">${j.org}</p><ul>${j.points.map((p) => `<li>${p}</li>`).join('')}</ul></div>
-    </li>`,
-  )
+  .map((j, i) => {
+    const tones = typeTone[j.type];
+    const tone = j.type === 'work' ? tones[workN++ % tones.length] : tones[0];
+    return `<li class="stack__item" style="--i:${i}">
+      <article class="jcard t-${tone}">
+        <div class="jcard__side">
+          <span class="jcard__ghost" aria-hidden="true">${j.year}</span>
+          <span class="jcard__year">${j.year}</span>
+          <div class="jcard__meta"><span class="jcard__when">${j.when}</span><span class="jcard__type">${typeName[j.type]}</span></div>
+        </div>
+        <div class="jcard__body">
+          <span class="jcard__idx">${String(i + 1).padStart(2, '0')} / ${String(journey.length).padStart(2, '0')}</span>
+          <h3>${j.role}</h3><p class="jcard__org">${j.org}</p>
+          <ul>${j.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+        </div>
+      </article>
+    </li>`;
+  })
   .join('');
 
 $('[data-certs]').innerHTML = certs
   .map(
     (c, i) => `<article class="holo t-${c.tone}" data-holo>
-      ${c.pending ? `<span class="holo__pending">${c.pending}</span>` : ''}
-      <div class="holo__top"><span>No. ${String(i + 1).padStart(3, '0')}</span><span>${c.pending ? 'In progress' : 'Certified'}</span></div>
+      ${c.ribbon ? `<span class="holo__ribbon">${c.ribbon}</span>` : ''}
+      <div class="holo__top"><span>No. ${String(i + 1).padStart(3, '0')}</span><span>Certified</span></div>
       <div class="holo__mark">${c.mark}</div>
       <svg class="holo__pattern" data-logo viewBox="${LOGO_VIEWBOX}"><path d="${LOGO_PATH}" fill="currentColor"/></svg>
       <h3>${c.name}</h3><p>${c.by}</p>
@@ -150,16 +172,22 @@ import('./scene.js')
   .then(({ createScene }) => {
     scene = createScene($('#gl'), { mobile: isMobile() || !finePointer, reduced });
     scene.setScroll(lenis.scroll);
+    scene.setDark(currentTheme() === 'dark');
   })
   .catch((err) => console.warn('WebGL scene unavailable', err));
 lenis.on('scroll', ({ scroll }) => scene?.setScroll(scroll));
 
-/* ───────── helpers ───────── */
-function splitChars(el) {
-  const text = el.textContent;
-  el.innerHTML = [...text].map((c) => (c === ' ' ? ' ' : `<span class="ch">${esc(c)}</span>`)).join('');
-  return $$('.ch', el);
-}
+// The 3D logo lives in reserved slots in the layout, never behind text.
+const anchors = $$('[data-anchor]');
+gsap.ticker.add(() => {
+  if (!scene) return;
+  let rect = null;
+  for (const el of anchors) {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > -r.height * 0.5 && r.top < innerHeight + r.height * 0.5) { rect = { x: r.left, y: r.top, w: r.width, h: r.height }; break; }
+  }
+  scene.setAnchor(rect);
+});
 
 /* ───────── loader + intro ───────── */
 const heroSm = $('.hero__line--sm');
@@ -231,7 +259,7 @@ if (finePointer && !reduced) {
 gsap.to('.hero__title', { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 gsap.to('.hero__bottom', { y: -80, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom top', scrub: true } });
 
-/* rotator */
+/* rotator: the pill resizes to hug each phrase */
 (function rotator() {
   const box = $('[data-rotator]');
   const words = $$('b', box);
@@ -239,8 +267,13 @@ gsap.to('.hero__bottom', { y: -80, opacity: 0, ease: 'none', scrollTrigger: { tr
   let i = 0;
   gsap.set(words, { yPercent: 110 });
   gsap.set(words[0], { yPercent: 0 });
-  const fit = () => (box.style.width = words[i].offsetWidth + 'px');
-  document.fonts.ready.then(() => { words.forEach((w) => (w.style.width = 'max-content')); fit(); });
+  const fit = () => {
+    const pad = parseFloat(getComputedStyle(words[i]).left) || 0;
+    box.style.width = Math.ceil(words[i].getBoundingClientRect().width + pad * 2) + 'px';
+  };
+  fit();
+  document.fonts.ready.then(fit);
+  addEventListener('resize', fit);
   setInterval(() => {
     const prev = words[i];
     i = (i + 1) % words.length;
@@ -347,10 +380,17 @@ function setAccent(id) {
 const mm = gsap.matchMedia();
 mm.add('(min-width: 900px)', () => {
   const track = $('[data-track]');
+  const bar = $('[data-work-bar]'), count = $('[data-work-count]');
   const dist = () => track.scrollWidth - innerWidth;
   const tween = gsap.to(track, {
     x: () => -dist(), ease: 'none',
-    scrollTrigger: { trigger: '.work', pin: '.work__pin', scrub: 0.8, start: 'top top', end: () => '+=' + dist(), invalidateOnRefresh: true, anticipatePin: 1 },
+    scrollTrigger: {
+      trigger: '.work', pin: '.work__pin', scrub: 0.8, start: 'top top', end: () => '+=' + dist(), invalidateOnRefresh: true, anticipatePin: 1,
+      onUpdate: (st) => {
+        bar.style.transform = `scaleX(${st.progress})`;
+        count.textContent = `${String(Math.min(projects.length, Math.round(st.progress * projects.length + 0.35))).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
+      },
+    },
   });
   $$('.proj').forEach((p) => {
     gsap.from($('.proj__stage', p), { xPercent: 40, rotate: 8, ease: 'none', scrollTrigger: { trigger: p, containerAnimation: tween, start: 'left right', end: 'left 30%', scrub: true } });
@@ -401,6 +441,7 @@ function openPreview(id) {
   $('[data-modal-open]').href = p.url;
   screen.innerHTML = `<div class="modal__loading">loading ${esc(p.name)}…</div><iframe src="${p.url}" title="${esc(p.name)} live preview" allow="autoplay; fullscreen; gamepad; clipboard-write" allowfullscreen></iframe>`;
   modal.classList.add('is-open');
+  document.documentElement.classList.add('modal-open');
   modal.setAttribute('aria-hidden', 'false');
   lenis.stop();
   $('iframe', screen).addEventListener('load', (e) => e.target.focus());
@@ -409,6 +450,7 @@ function openPreview(id) {
 function closePreview() {
   if (!modal.classList.contains('is-open')) return;
   modal.classList.remove('is-open');
+  document.documentElement.classList.remove('modal-open');
   modal.setAttribute('aria-hidden', 'true');
   lenis.start();
   setTimeout(() => (screen.innerHTML = ''), 450);
@@ -420,45 +462,28 @@ document.addEventListener('click', (e) => {
 });
 addEventListener('keydown', (e) => e.key === 'Escape' && (closePreview(), closeMenu()));
 
-/* ───────── trainer: orbit ───────── */
-(function orbit() {
-  const chips = $$('.orbit__chip');
-  const box = $('.orbit');
-  let visible = false, t = 0, speed = 1;
-  new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(box);
-  box.addEventListener('pointerenter', () => (speed = 0.25));
-  box.addEventListener('pointerleave', () => (speed = 1));
-  gsap.ticker.add((_, dt) => {
-    if (!visible) return;
-    t += dt * 0.00035 * speed * (reduced ? 0 : 1);
-    const R = box.offsetWidth * (box.offsetWidth < 480 ? 0.27 : 0.44);
-    chips.forEach((c, i) => {
-      const a = (i / chips.length) * Math.PI * 2 + t;
-      const x = Math.cos(a) * R, z = Math.sin(a) * R, y = Math.sin(a * 2 + i) * R * 0.18 + Math.sin(a) * R * 0.28;
-      const s = 0.7 + ((z / R) + 1) * 0.2;
-      c.style.transform = `translate(-50%,-50%) translate3d(${x}px,${y}px,0) scale(${s})`;
-      c.style.zIndex = String(Math.round(z + R));
-      c.style.opacity = String(0.45 + ((z / R) + 1) * 0.275);
-    });
-  });
-})();
-gsap.from('.prog', { y: 100, opacity: 0, rotate: (i) => [-4, 3, -2][i], duration: 1.2, stagger: 0.1, ease: 'expo.out', scrollTrigger: { trigger: '.programmes', start: 'top 85%', once: true } });
-gsap.from('.polaroid', { rotate: -20, y: 80, opacity: 0, duration: 1.4, ease: 'elastic.out(1,0.6)', scrollTrigger: { trigger: '.trainer__grid', start: 'top 80%', once: true } });
-gsap.from('.mega--trainer span', { yPercent: 60, opacity: 0, stagger: 0.12, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.trainer', start: 'top 75%', once: true } });
+/* ───────── trainer ───────── */
+gsap.from('.trainer__cards .tcard, .trainer__bottom .tcard', { y: 50, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.trainer__cards', start: 'top 88%', once: true } });
+gsap.from('.polaroid', { rotate: -18, y: 60, opacity: 0, duration: 1.4, ease: 'elastic.out(1,0.6)', scrollTrigger: { trigger: '.trainer', start: 'top 70%', once: true } });
+gsap.from('.trainer__title > span', { yPercent: 60, opacity: 0, stagger: 0.12, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.trainer', start: 'top 75%', once: true } });
+$$('.topics__wrap span').forEach((t, i) => t.style.setProperty('--d', `${i * 45}ms`));
+ScrollTrigger.create({ trigger: '.topics__wrap', start: 'top 92%', once: true, onEnter: () => $('.topics__wrap').classList.add('is-in') });
 
 // Nav switches to light-on-dark while the dark trainer panel is under it.
 ScrollTrigger.create({ trigger: '.trainer', start: 'top 40px', end: 'bottom 40px', toggleClass: { targets: '.nav', className: 'nav--invert' } });
 
-/* ───────── journey ───────── */
-(function timeline() {
-  const path = $('.timeline__line path');
-  gsap.set(path, { attr: { pathLength: 1 }, strokeDasharray: 1, strokeDashoffset: 1 });
-  gsap.to(path, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'top 70%', end: 'bottom 70%', scrub: true } });
-  $$('.tl').forEach((li, i) => {
-    ScrollTrigger.create({ trigger: li, start: 'top 72%', onEnter: () => li.classList.add('is-in'), onLeaveBack: () => li.classList.remove('is-in') });
-    const side = isMobile() ? 60 : i % 2 ? -100 : 100;
-    gsap.from($('.tl__card', li), { x: side, opacity: 0, rotate: i % 2 ? -3 : 3, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: li, start: 'top 82%', once: true } });
-    gsap.from($('.tl__when', li), { opacity: 0, y: 30, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: li, start: 'top 82%', once: true } });
+/* ───────── journey: cards stack and recede as the next one arrives ───────── */
+(function stack() {
+  const items = $$('.stack__item');
+  items.forEach((li, i) => {
+    const card = $('.jcard', li);
+    gsap.from(card, { y: 80, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: li, start: 'top 92%', once: true } });
+    const next = items[i + 1];
+    if (!next) return;
+    gsap.fromTo(card, { scale: 1, '--dim': 0 }, {
+      scale: 0.94, '--dim': 1, ease: 'none', immediateRender: false,
+      scrollTrigger: { trigger: next, start: 'top bottom', end: () => `top ${parseFloat(getComputedStyle(next).top) + 20}px`, scrub: true, invalidateOnRefresh: true },
+    });
   });
 })();
 
@@ -511,8 +536,6 @@ ScrollTrigger.create({ trigger: '.trainer', start: 'top 40px', end: 'bottom 40px
 gsap.from('.more__item', { y: 60, opacity: 0, stagger: 0.06, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.more__list', start: 'top 85%', once: true } });
 
 /* ───────── contact ───────── */
-// Created after the pinned playground so its start/end include the pin spacing.
-ScrollTrigger.create({ trigger: '.contact', start: 'top 90%', end: 'top 10%', scrub: true, onUpdate: (st) => scene?.setOutro(st.progress) });
 
 (function bounce() {
   const el = $('[data-bounce]');
@@ -564,13 +587,14 @@ if (finePointer) {
 
 /* ───────── menu ───────── */
 const menuBtn = $('[data-menu-toggle]');
-const menuTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.inOut' } })
-  .to('.menu__bg i', { scaleX: 1, duration: 0.8, stagger: 0.08 })
-  .fromTo('.menu__list a', { yPercent: 110 }, { yPercent: 0, duration: 0.9, stagger: 0.05, ease: 'expo.out', immediateRender: false }, '-=0.35')
-  .to('.menu__foot', { opacity: 1, duration: 0.5 }, '-=0.6');
-gsap.set('.menu__list a', { yPercent: 110 });
+const menuTl = gsap.timeline({ paused: true })
+  .to('.menu__scrim', { opacity: 1, duration: 0.4, ease: 'power2.out' })
+  .to('.menu__panel', { clipPath: 'inset(0% 0% 0% 0% round 28px)', duration: 0.7, ease: 'expo.out' }, 0)
+  .from('.menu__list a', { yPercent: 100, opacity: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out' }, 0.12)
+  .from('.menu__head, .menu__foot', { opacity: 0, duration: 0.4 }, 0.3);
 function openMenu() {
   document.documentElement.classList.add('menu-open');
+  $('[data-menu-label]').textContent = 'Close';
   menuBtn.setAttribute('aria-expanded', 'true');
   $('#menu').setAttribute('aria-hidden', 'false');
   lenis.stop();
@@ -579,8 +603,9 @@ function openMenu() {
 function closeMenu(then) {
   if (!document.documentElement.classList.contains('menu-open')) return then?.();
   menuBtn.setAttribute('aria-expanded', 'false');
+  $('[data-menu-label]').textContent = 'Menu';
   $('#menu').setAttribute('aria-hidden', 'true');
-  menuTl.timeScale(1.8).reverse().then(() => {
+  menuTl.timeScale(2).reverse().then(() => {
     document.documentElement.classList.remove('menu-open');
     lenis.start();
     then?.();
@@ -588,6 +613,21 @@ function closeMenu(then) {
 }
 menuBtn.addEventListener('click', () => (document.documentElement.classList.contains('menu-open') ? closeMenu() : openMenu()));
 $$('[data-menu-link]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); closeMenu(() => scrollToHash(a.getAttribute('href'))); }));
+$('[data-menu-close]').addEventListener('click', () => closeMenu());
+
+/* ───────── floating back-to-top ───────── */
+(function toTop() {
+  const btn = $('[data-totop]');
+  const ring = $('.totop__progress circle');
+  lenis.on('scroll', ({ scroll, limit }) => {
+    btn.classList.toggle('is-on', scroll > innerHeight * 0.9);
+    ring.style.setProperty('--off', String(1 - (limit ? scroll / limit : 0)));
+  });
+  btn.addEventListener('click', () => {
+    gsap.fromTo(btn, { y: 0 }, { y: -40, duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' });
+    lenis.scrollTo(0, { duration: reduced ? 0 : 1.8 });
+  });
+})();
 
 /* ───────── theme ───────── */
 const metaTheme = $$('meta[name="theme-color"]');
@@ -604,13 +644,13 @@ $('[data-theme-toggle]').addEventListener('click', () => {
   document.documentElement.dataset.theme = next;
   try { localStorage.setItem('theme', next); } catch {}
   syncMeta();
+  scene?.setDark(next === 'dark');
   gsap.fromTo('[data-theme-toggle] svg', { rotate: -120, scale: 0.4 }, { rotate: 0, scale: 1, duration: 0.8, ease: 'back.out(2)' });
 });
 
 /* ───────── clock ───────── */
-const clock = $('[data-clock]');
 const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit' });
-const tick = () => (clock.textContent = `KUL ${fmt.format(new Date())}`);
+const tick = () => $$('[data-clock]').forEach((c) => (c.textContent = `KUL ${fmt.format(new Date())}`));
 tick();
 setInterval(tick, 15000);
 

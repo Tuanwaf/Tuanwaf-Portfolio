@@ -101,27 +101,28 @@ export function createScene(canvas, { mobile, reduced }) {
   logoGroup.add(logoMesh);
   scene.add(logoGroup);
 
-  // Blobs + props
+  // Blobs + props. Positions are fractions of the visible half-width/half-height so they
+  // hug the screen edges at any aspect ratio and stay clear of the text column.
   const props = [];
   const blobGeo = new THREE.IcosahedronGeometry(1, mobile ? 20 : 40);
   const layout = [
-    { g: blobGeo, s: 1.25, p: [-4.6, 2.1, -2], c: 0 },
-    { g: blobGeo, s: 0.9, p: [4.4, -1.8, -1], c: 1 },
-    { g: blobGeo, s: 0.55, p: [3.5, 2.6, 0.5], c: 2 },
-    { g: blobGeo, s: 0.7, p: [-3.2, -2.7, 0.8], c: 3 },
-    { g: new THREE.TorusGeometry(0.62, 0.24, 32, 96), s: 1, p: [-5.2, -0.3, -3], c: 4, spin: 1 },
-    { g: new THREE.CapsuleGeometry(0.34, 0.9, 12, 32), s: 1, p: [5.6, 0.9, -2.5], c: 5, spin: 1 },
-    { g: blobGeo, s: 0.32, p: [1.4, -3.1, 1.5], c: 4 },
-    { g: blobGeo, s: 0.26, p: [-1.8, 3.2, 1.2], c: 2 },
+    { g: blobGeo, s: 1.0, f: [-1.12, 0.8], z: -2, c: 0 },
+    { g: blobGeo, s: 0.9, f: [1.06, -0.3], z: -1, c: 1 },
+    { g: blobGeo, s: 0.45, f: [0.95, 0.6], z: 0.5, c: 2 },
+    { g: blobGeo, s: 0.62, f: [-1.1, -0.35], z: 0.8, c: 3 },
+    { g: new THREE.TorusGeometry(0.62, 0.24, 32, 96), s: 0.9, f: [0.2, -1.08], z: -3, c: 4, spin: 1 },
+    { g: new THREE.CapsuleGeometry(0.34, 0.9, 12, 32), s: 1, f: [1.1, 0.4], z: -2.5, c: 5, spin: 1 },
+    { g: blobGeo, s: 0.3, f: [-0.98, 0.1], z: 1.5, c: 4 },
+    { g: blobGeo, s: 0.26, f: [0.22, -1.02], z: 1.2, c: 2 },
   ];
   const baseColors = [];
+  let dim = 1; // < 1 in dark mode so light text stays readable over the blobs
   layout.forEach((o, i) => {
     const isBlob = o.g === blobGeo;
     const mat = isBlob ? blobMaterial(PASTELS[o.c], i) : new THREE.MeshPhysicalMaterial({ color: PASTELS[o.c], roughness: 0.25, clearcoat: 1, sheen: 0.3, iridescence: 0.3 });
     const mesh = new THREE.Mesh(o.g, mat);
     mesh.scale.setScalar(o.s);
-    mesh.position.set(...o.p);
-    mesh.userData = { base: new THREE.Vector3(...o.p), phase: i * 1.7, spin: o.spin, depth: 0.4 + (o.p[2] + 3) * 0.2 };
+    mesh.userData = { f: o.f, z: o.z, s: o.s, phase: i * 1.7, spin: o.spin, depth: 0.4 + (o.z + 3) * 0.2 };
     baseColors.push(new THREE.Color(PASTELS[o.c]));
     scene.add(mesh);
     props.push(mesh);
@@ -132,19 +133,19 @@ export function createScene(canvas, { mobile, reduced }) {
   const smooth = new THREE.Vector2(0, 0);
   let scroll = 0; // page px
   let heroH = window.innerHeight;
+  let anchor = null; // screen rect the logo should fill, or null to hide it
+  let logoScale = 0;
   let spinBoost = 0, spinAngle = 0;
   let accent = null; // THREE.Color[] while a project is focused
-  let outro = 0; // 0..1 as the contact section scrolls in
   let running = true;
   let dragging = false, dragX = 0, dragVel = 0, dragRot = 0;
   const timer = new THREE.Timer();
+  const tmp = new THREE.Color();
 
   function resize() {
     const w = window.innerWidth, h = window.innerHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    // Keep the logo a sensible size on tall phones.
-    camera.position.z = w / h < 0.8 ? 17 : 12;
     camera.updateProjectionMatrix();
     heroH = h;
   }
@@ -159,17 +160,18 @@ export function createScene(canvas, { mobile, reduced }) {
   // Click / drag the logo (canvas has pointer-events: none, so raycast from window events)
   const ray = new THREE.Raycaster();
   function hitLogo(e) {
+    if (!anchor || logoScale < 0.1) return false;
     const v = new THREE.Vector2((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
     ray.setFromCamera(v, camera);
     return ray.intersectObject(logoMesh).length > 0;
   }
   window.addEventListener('pointerdown', (e) => {
-    if ((scroll > heroH * 0.8 && outro < 0.9) || e.target.closest('a,button,[data-drag],.bento__card')) return;
-    if (hitLogo(e)) { dragging = true; dragX = e.clientX; dragVel = 0; document.body.classList.add('logo-drag'); }
+    if (e.target.closest('a,button,[data-drag],.bento__card,.menu,.modal')) return;
+    if (hitLogo(e)) { dragging = true; dragX = e.clientX; dragVel = 0; }
   });
   window.addEventListener('pointerup', (e) => {
     if (dragging && Math.abs(dragVel) < 0.02 && hitLogo(e)) spinBoost = 1;
-    dragging = false; document.body.classList.remove('logo-drag');
+    dragging = false;
   });
 
   function frame() {
@@ -178,44 +180,49 @@ export function createScene(canvas, { mobile, reduced }) {
     const dt = Math.min(timer.getDelta(), 0.05);
     const t = timer.getElapsed();
     smooth.lerp(pointer, 1 - Math.pow(0.001, dt));
+    const W = window.innerWidth, H = window.innerHeight;
+    const vh = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
+    const vw = vh * camera.aspect;
+    const wide = camera.aspect > 1;
 
-    // Logo: floats in hero, then drifts right & back as you scroll away.
+    // Logo: glued to its DOM slot (hero stage / contact stage), sized to fit inside it.
     spinBoost *= Math.pow(0.08, dt);
     spinAngle += spinBoost * dt * 22;
     if (!dragging) { dragRot += dragVel; dragVel *= Math.pow(0.02, dt); }
-    const wide = camera.aspect > 1;
-    const vh = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-    const vw = vh * camera.aspect;
-    // Hero pose -> flies up and away over the first screen -> returns for the contact outro.
-    const leave = Math.min(scroll / heroH, 1);
-    const hx = (wide ? vw * 0.52 : 0) + leave * (wide ? vw * 0.25 : 0.8);
-    const hy = (wide ? vh * 0.3 : vh * 0.38) + leave * vh * 1.9;
-    const ox = wide ? vw * 0.55 : 0, oy = wide ? -vh * 0.05 : vh * 0.55;
-    const o = outro * outro * (3 - 2 * outro);
-    logoGroup.position.x = hx + (ox - hx) * o;
-    logoGroup.position.y = hy + (oy - hy) * o + Math.sin(t * 0.8) * 0.12;
-    logoGroup.position.z = -leave * 3 * (1 - o);
-    logoGroup.rotation.y = smooth.x * 0.55 + Math.sin(t * 0.4) * 0.18 + spinAngle + dragRot + leave * 1.4 * (1 - o);
+    let targetScale = 0;
+    if (anchor) {
+      const cx = anchor.x + anchor.w / 2, cy = anchor.y + anchor.h / 2;
+      logoGroup.position.x = (cx / W) * 2 * vw - vw;
+      logoGroup.position.y = vh - (cy / H) * 2 * vh + Math.sin(t * 0.8) * 0.1;
+      const fitW = Math.min(anchor.w * 0.82, anchor.h * 0.8 * logo.aspect);
+      targetScale = ((fitW / W) * 2 * vw) / 3.3;
+    }
+    logoScale += (targetScale - logoScale) * (1 - Math.pow(0.002, dt));
+    logoGroup.visible = logoScale > 0.01;
+    logoGroup.scale.setScalar(logoScale * (1 + spinBoost * 0.12));
+    logoGroup.rotation.y = smooth.x * 0.55 + Math.sin(t * 0.4) * 0.22 + spinAngle + dragRot;
     logoGroup.rotation.x = -smooth.y * 0.35 + Math.cos(t * 0.5) * 0.06;
     logoGroup.rotation.z = Math.sin(t * 0.3) * 0.04;
-    const ls = (wide ? 1.15 : 1.25) * (1 + spinBoost * 0.12);
-    logoGroup.scale.setScalar(ls);
     logoMat.iridescenceThicknessRange[1] = 700 + Math.sin(t * 0.7) * 160;
 
-    // Blobs: drift, parallax with pointer and scroll.
+    // Blobs: hug the edges, drift, parallax with pointer, and wrap with scroll.
+    const bs = wide ? 1 : 0.5;
     props.forEach((m, i) => {
       const u = m.userData;
-      m.position.x = u.base.x + Math.sin(t * 0.35 + u.phase) * 0.35 + smooth.x * u.depth * 0.6;
-      // Scroll parallax that wraps, so the blobs keep drifting through the whole page.
+      let fx = u.f[0];
+      if (!wide) fx = Math.sign(fx || 1) * Math.max(Math.abs(fx), 1.12);
+      m.scale.setScalar(u.s * bs);
+      m.position.x = fx * vw + Math.sin(t * 0.35 + u.phase) * 0.3 + smooth.x * u.depth * 0.5;
       const span = vh + 2;
-      const raw = u.base.y + (scroll / heroH) * u.depth * 2.2 + span;
+      const raw = u.f[1] * vh + (scroll / heroH) * u.depth * 2.2 + span;
       const wrapped = (((raw % (2 * span)) + 2 * span) % (2 * span)) - span;
-      m.position.y = wrapped + Math.cos(t * 0.3 + u.phase) * 0.35 + smooth.y * u.depth * 0.4;
+      m.position.y = wrapped + Math.cos(t * 0.3 + u.phase) * 0.3 + smooth.y * u.depth * 0.3;
+      m.position.z = u.z;
       if (u.spin) { m.rotation.x = t * 0.4 + u.phase; m.rotation.y = t * 0.3; }
       const uni = m.material.userData.uniforms;
       if (uni) uni.uTime.value += dt;
-      const target = accent ? accent[i % accent.length] : baseColors[i];
-      m.material.color.lerp(target, 1 - Math.pow(0.05, dt));
+      tmp.copy(accent ? accent[i % accent.length] : baseColors[i]).multiplyScalar(dim);
+      m.material.color.lerp(tmp, 1 - Math.pow(0.05, dt));
     });
 
     renderer.render(scene, camera);
@@ -231,7 +238,8 @@ export function createScene(canvas, { mobile, reduced }) {
 
   return {
     setScroll(y) { scroll = y; if (reduced) frame(); },
-    setOutro(p) { outro = p; },
+    setAnchor(rect) { anchor = rect; },
+    setDark(on) { dim = on ? 0.62 : 1; },
     setAccent(colors) { accent = colors ? colors.map((c) => new THREE.Color(c)) : null; },
     spin() { spinBoost = 1; },
   };

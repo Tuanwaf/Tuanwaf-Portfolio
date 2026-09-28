@@ -77,14 +77,6 @@ export const projects = [
   },
 ];
 
-export const lab = {
-  name: 'Kembara & Catch',
-  kind: 'In the lab',
-  blurb:
-    'An educational creature-catching adventure where maths answers power your attacks. Tiled overworld, layered character skins and a VS-style battle screen.',
-  stack: ['SvelteKit', 'TypeScript', 'Phaser 4', 'SQLite'],
-};
-
 export const training = {
   programmes: [
     {
@@ -93,6 +85,7 @@ export const training = {
       text:
         'Delivered the AI+ Everyone™ programme to internal staff at Knowledgecom — AI fundamentals, machine learning concepts, generative AI, responsible AI and prompt engineering for non-technical teams.',
       color: 'lilac',
+      points: ['AI fundamentals & ML concepts', 'Generative AI & prompt engineering', 'Responsible AI at work'],
     },
     {
       tag: 'Hands-on workshop',
@@ -100,13 +93,7 @@ export const training = {
       text:
         'A practical Gen AI workshop: AI-assisted data cleaning, AI-assisted reporting, Claude AI for analytics and the responsible use of generative AI at work.',
       color: 'peach',
-    },
-    {
-      tag: 'Public programmes',
-      title: 'AI Awareness & Productivity',
-      text:
-        'AI literacy and workplace-productivity sessions for public participants, career switchers and job seekers — from “what is AI?” to using it every day.',
-      color: 'mint',
+      points: ['AI-assisted data cleaning', 'AI-assisted reporting', 'Claude AI for analytics'],
     },
   ],
   topics: [
@@ -130,24 +117,27 @@ export const training = {
 
 export const journey = [
   {
+    year: '2026',
+    when: 'Aug 2026',
+    role: 'HRD Corp Certified Trainer',
+    org: 'Train-the-Trainer (TTT) programme',
+    type: 'cert',
+    points: ['Certified through the HRD Corp TTT programme — now awaiting accreditation.'],
+  },
+  {
+    year: '2026',
     when: 'Jan 2026 — Now',
     role: 'Trainer / IT Consultant',
     org: 'Knowledgecom Corporation · Petaling Jaya',
     type: 'work',
     points: [
       'Deliver AI awareness, Generative AI and workplace-productivity programmes, in person and online.',
-      'Build training materials — slides, hands-on exercises, assessments and learning resources.',
-      'Adapt delivery to each group’s skill level and improve content from assessment and feedback.',
+      'Ran AI+ Everyone™ training for internal staff and Gen AI workshops for data analysts.',
+      'Build slides, hands-on exercises and assessments, and improve them from feedback.',
     ],
   },
   {
-    when: 'Aug 2026',
-    role: 'HRD Corp Train-the-Trainer',
-    org: 'Professional development',
-    type: 'cert',
-    points: ['Completed the HRD Corp TTT programme — awaiting assessment results and accreditation.'],
-  },
-  {
+    year: '2025',
     when: 'Aug — Nov 2025',
     role: 'Digital Associates Apprentice',
     org: 'Knowledgecom Academy · Petaling Jaya',
@@ -155,6 +145,7 @@ export const journey = [
     points: ['Designed and built a full-stack training-management mobile app with React Native and Laravel (JWT auth, OTP recovery, REST APIs).'],
   },
   {
+    year: '2025',
     when: 'Mar — Jun 2025',
     role: 'Web Developer Intern',
     org: 'Tamarix Onesolutions · Cyberjaya',
@@ -162,10 +153,11 @@ export const journey = [
     points: [
       'Built and maintained responsive client websites with HTML, CSS, JavaScript and PHP.',
       'Ran system testing and QA — UAT scripts and bug reports.',
-      'Wrote technical docs, user guides and video tutorials for system delivery.',
+      'Wrote technical docs, user guides and video tutorials.',
     ],
   },
   {
+    year: '2025',
     when: '2023 — 2025',
     role: 'BSc (Hons) Computer Science',
     org: 'UiTM Kuala Terengganu',
@@ -173,6 +165,7 @@ export const journey = [
     points: ['CGPA 3.70 · Dean’s List in 3 of 4 semesters.', 'Final year project: a video-game recommender using NMF collaborative filtering.'],
   },
   {
+    year: '2023',
     when: 'Sep 2022 — Feb 2023',
     role: 'Web Developer Intern',
     org: 'JAZRO Robotic Academy · Kerteh',
@@ -180,6 +173,7 @@ export const journey = [
     points: ['Built EduBlock — a Blockly-based site that teaches kids to code and drive the EduBot learning robot.'],
   },
   {
+    year: '2023',
     when: '2021 — 2023',
     role: 'Diploma in Computer Science',
     org: 'UiTM Machang',
@@ -192,7 +186,7 @@ export const certs = [
   { name: 'AI+ Foundation™', by: 'AI CERTs®', tone: 'lilac', mark: 'AI+' },
   { name: 'AI+ Everyone™', by: 'AI CERTs®', tone: 'peach', mark: 'AI+' },
   { name: 'AI+ Developer™', by: 'AI CERTs®', tone: 'mint', mark: 'AI+' },
-  { name: 'Train-the-Trainer', by: 'HRD Corp', tone: 'butter', mark: 'TTT', pending: 'Accreditation pending' },
+  { name: 'Train-the-Trainer', by: 'HRD Corp · certified', tone: 'butter', mark: 'TTT', ribbon: 'Accreditation pending' },
   { name: 'MERN Full Stack Developer', by: 'K-Youth', tone: 'sky', mark: 'MERN' },
   { name: 'The Power of Machine Learning', by: 'Python workshop', tone: 'rose', mark: 'PY' },
   { name: 'Hands-on Mobile Apps', by: 'Flutter workshop', tone: 'sky', mark: 'FL' },

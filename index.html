@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Wafiq — Developer, AI Trainer & Game Maker</title>
-    <meta name="description" content="Portfolio of Tuan Ahmad Wafiq — web & mobile developer, AI trainer at Knowledgecom, and maker of BajetBro, Island of Kail and Noctudite." />
+    <meta name="description" content="Portfolio of Tuan Ahmad Wafiq — web & mobile developer, HRD Corp certified AI trainer at Knowledgecom, and maker of BajetBro, Island of Kail and Noctudite." />
     <meta name="theme-color" content="#FFF8F1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#16121E" media="(prefers-color-scheme: dark)" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,28 +57,37 @@
           <svg viewBox="0 0 24 24" class="i-moon"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
         </button>
         <button class="nav__menu" data-menu-toggle aria-expanded="false" aria-controls="menu" data-magnetic>
-          <span class="nav__menu-label">Menu</span>
+          <span class="nav__menu-label" data-menu-label>Menu</span>
           <span class="burger"><i></i><i></i></span>
         </button>
       </div>
     </header>
 
-    <nav class="menu" id="menu" aria-hidden="true">
-      <div class="menu__bg"><i></i><i></i><i></i></div>
-      <ol class="menu__list">
-        <li><a href="#work" data-menu-link><small>01</small>Playground</a></li>
-        <li><a href="#trainer" data-menu-link><small>02</small>Trainer</a></li>
-        <li><a href="#journey" data-menu-link><small>03</small>Journey</a></li>
-        <li><a href="#creds" data-menu-link><small>04</small>Credentials</a></li>
-        <li><a href="#skills" data-menu-link><small>05</small>Skills</a></li>
-        <li><a href="#contact" data-menu-link><small>06</small>Say hi</a></li>
-      </ol>
-      <div class="menu__foot">
-        <button class="btn btn--ghost" data-install hidden>Install this portfolio as an app</button>
-        <a href="https://github.com/Tuanwaf" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/tuan-ahmad-wafiq-7ab842356/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      </div>
-    </nav>
+    <!-- Menu: a dropdown panel that unfolds from the menu button -->
+    <div class="menu" id="menu" aria-hidden="true">
+      <div class="menu__scrim" data-menu-close></div>
+      <nav class="menu__panel" aria-label="Sections">
+        <div class="menu__head">
+          <span>Navigate</span>
+          <span data-clock>KUL --:--</span>
+        </div>
+        <ol class="menu__list">
+          <li><a href="#about" data-menu-link style="--tone: var(--peach)"><span class="menu__no">00</span><span class="menu__txt">Hello</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#work" data-menu-link style="--tone: var(--mint)"><span class="menu__no">01</span><span class="menu__txt">Playground</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#trainer" data-menu-link style="--tone: var(--lilac)"><span class="menu__no">02</span><span class="menu__txt">Trainer</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#journey" data-menu-link style="--tone: var(--sky)"><span class="menu__no">03</span><span class="menu__txt">Journey</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#creds" data-menu-link style="--tone: var(--butter)"><span class="menu__no">04</span><span class="menu__txt">Credentials</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#skills" data-menu-link style="--tone: var(--rose)"><span class="menu__no">05</span><span class="menu__txt">Skills</span><span class="menu__arrow">→</span></a></li>
+          <li><a href="#contact" data-menu-link style="--tone: var(--peach)"><span class="menu__no">06</span><span class="menu__txt">Say hi</span><span class="menu__arrow">→</span></a></li>
+        </ol>
+        <div class="menu__foot">
+          <a href="https://github.com/Tuanwaf" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/tuan-ahmad-wafiq-7ab842356/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="docs/Wafiq-Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
+          <button data-install hidden>＋ Install app</button>
+        </div>
+      </nav>
+    </div>
 
     <main id="main">
       <!-- HERO -->
@@ -88,10 +97,13 @@
           <span>Cyberjaya, Malaysia</span>
           <span>Developer / Trainer / Game maker</span>
         </div>
-        <h1 class="hero__title" aria-label="Tuan Ahmad Wafiq">
-          <span class="hero__line hero__line--sm" data-split>Tuan Ahmad</span>
-          <span class="hero__line hero__line--xl" data-wave>Wafiq</span>
-        </h1>
+        <div class="hero__main">
+          <h1 class="hero__title" aria-label="Tuan Ahmad Wafiq">
+            <span class="hero__line hero__line--sm">Tuan Ahmad</span>
+            <span class="hero__line hero__line--xl">Wafiq</span>
+          </h1>
+          <div class="hero__stage" data-anchor="hero" aria-hidden="true"><span class="hero__hint">drag · click me</span></div>
+        </div>
         <div class="hero__bottom">
           <p class="hero__intro">
             I <span class="rotator" data-rotator><b>build apps</b><b>make games</b><b>teach AI</b><b>ship PWAs</b></span><br />
@@ -103,12 +115,11 @@
             <span class="badge__arrow">↓</span>
           </a>
         </div>
-        <div class="hero__hint">drag · click the logo</div>
       </section>
 
       <!-- Crossing tapes -->
       <div class="tapes" aria-hidden="true">
-        <div class="tape tape--a"><div class="tape__track" data-tape>Web &amp; mobile developer ✦ AI+ certified trainer ✦ Godot game maker ✦ PWA enjoyer ✦ HRD Corp TTT ✦ </div></div>
+        <div class="tape tape--a"><div class="tape__track" data-tape>Web &amp; mobile developer ✦ HRD Corp certified trainer ✦ AI+ certified ✦ Godot game maker ✦ PWA enjoyer ✦ </div></div>
         <div class="tape tape--b"><div class="tape__track" data-tape="-1">Build ✦ Teach ✦ Play ✦ Repeat ✦ Build ✦ Teach ✦ Play ✦ Repeat ✦ </div></div>
       </div>
 
@@ -119,29 +130,36 @@
           <h2 class="sec-title" data-reveal>Hi, I’m Wafiq. I <span class="serif">teach AI</span> by day and build <span class="serif">apps &amp; games</span> by night.</h2>
         </header>
         <div class="bento">
-          <article class="bento__card bento__photo" data-tilt>
-            <div class="photo-blob"></div>
-            <img src="/img/wafiq-cutout.webp" alt="Wafiq in a black baju Melayu with songket samping" loading="lazy" width="672" height="1600" />
+          <figure class="bento__photo" data-tilt>
+            <img src="/img/wafiq-booth.webp" alt="Wafiq taking a mirror selfie in a hoodie, framed like a Photo Booth window" loading="lazy" width="844" height="926" />
             <div class="sticker s1" data-drag>CS grad 🎓</div>
             <div class="sticker s2" data-drag>AI trainer</div>
             <div class="sticker s3" data-drag>Game dev 🎮</div>
             <div class="sticker s4" data-drag>drag us ✦</div>
-          </article>
+          </figure>
           <article class="bento__card bento__bio">
             <p class="kicker">About</p>
             <p>Computer Science graduate from <b>UiTM</b> who has shipped web and mobile apps with React Native, Laravel and the MERN stack across internships and an apprenticeship.</p>
-            <p>Today I’m a <b>Trainer / IT Consultant at Knowledgecom</b>, turning complex AI ideas into practical workplace skills — and after hours I make PWAs and Godot games that people actually play.</p>
+            <p>Today I’m a <b>Trainer / IT Consultant at Knowledgecom</b> and an <b>HRD Corp certified trainer</b>, turning complex AI ideas into practical workplace skills — and after hours I make PWAs and Godot games that people actually play.</p>
           </article>
           <article class="bento__card bento__now">
             <p class="kicker">Currently</p>
             <p class="big">Trainer / IT Consultant</p>
             <p>Knowledgecom Corporation · since Jan 2026</p>
-            <span class="chip chip--live"><span class="pulse"></span>HRD Corp TTT · accreditation pending</span>
+            <span class="chip chip--live"><span class="pulse"></span>HRD Corp TTT certified</span>
           </article>
-          <article class="bento__card bento__stat t-lilac"><span class="num" data-count-to="3.70" data-decimals="2">0</span><span>Degree CGPA</span></article>
-          <article class="bento__card bento__stat t-mint"><span class="num" data-count-to="3.85" data-decimals="2">0</span><span>Diploma CGPA</span></article>
-          <article class="bento__card bento__stat t-peach"><span class="num"><span data-count-to="3">0</span>/4</span><span>Dean’s List semesters</span></article>
-          <article class="bento__card bento__award t-butter"><span class="award-ico">🏆</span><p>Vice-Chancellor’s Award<br />&amp; Best Student Award</p></article>
+          <article class="bento__card record">
+            <div class="record__head">
+              <p class="kicker">Academic record</p>
+              <p class="kicker">UiTM · 2021 — 2025</p>
+            </div>
+            <div class="record__grid">
+              <div class="record__cell"><span class="record__num"><span data-count-to="3.70" data-decimals="2">0</span></span><span class="record__label">Degree CGPA</span><span class="record__sub">BSc (Hons) Computer Science</span></div>
+              <div class="record__cell"><span class="record__num"><span data-count-to="3.85" data-decimals="2">0</span></span><span class="record__label">Diploma CGPA</span><span class="record__sub">Diploma in Computer Science</span></div>
+              <div class="record__cell"><span class="record__num"><span data-count-to="3">0</span><small>/4</small></span><span class="record__label">Dean’s List</span><span class="record__sub">semesters during the degree</span></div>
+              <div class="record__cell record__cell--award"><span class="record__medal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M16 4h16l-4 14h-8z" /><circle cx="24" cy="30" r="12" /><path d="M24 23l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" /></svg></span><span class="record__label">Vice-Chancellor’s Award</span><span class="record__sub">+ Best Student Award (Diploma)</span></div>
+            </div>
+          </article>
           <article class="bento__card bento__langs">
             <p class="kicker">Languages</p>
             <ul class="langs">
@@ -165,48 +183,44 @@
               <span class="sec-head__no">01 — personal projects</span>
               <h2 class="mega"><span class="outline">PLAY</span><span>GROUND</span></h2>
               <p class="work__lede">Things I build for fun that turned into things people use. Every one is live — <b>press play</b>, or try them right here.</p>
-              <div class="work__scroll-hint"><span>scroll</span><i></i></div>
+              <div class="work__scroll-hint"><span>keep scrolling</span><i></i></div>
             </div>
             <div data-projects class="panels"></div>
-            <div class="panel panel--lab" data-lab></div>
           </div>
+          <div class="work__progress" aria-hidden="true"><span data-work-count>00 / 03</span><i><b data-work-bar></b></i></div>
         </div>
       </section>
 
       <!-- TRAINER -->
-      <section class="trainer section" id="trainer">
+      <section class="trainer" id="trainer">
         <div class="trainer__inner">
-          <header class="trainer__head">
-            <span class="sec-head__no">02 — the other hat</span>
-            <h2 class="mega mega--trainer"><span>I also</span> <span class="serif">teach.</span></h2>
-            <p class="trainer__lede">As a <b>Trainer / IT Consultant at Knowledgecom</b>, I run AI literacy and Generative AI programmes for internal staff, corporate teams and public participants — hands-on, jargon-free and built around real work.</p>
-          </header>
-          <div class="trainer__grid">
+          <div class="trainer__top">
+            <div>
+              <span class="sec-head__no">02 — the other hat</span>
+              <h2 class="trainer__title"><span>I also</span> <span class="serif">teach.</span></h2>
+              <p class="trainer__lede">As a <b>Trainer / IT Consultant at Knowledgecom</b>, I run AI literacy and Generative AI programmes for internal staff, corporate teams and public participants — hands-on, jargon-free and built around real work.</p>
+              <div class="trainer__facts">
+                <div><b>3×</b><span>AI CERTs® certifications</span></div>
+                <div><b>TTT</b><span>HRD Corp certified trainer</span></div>
+                <div><b>Gen AI</b><span>workshops &amp; staff programmes</span></div>
+              </div>
+            </div>
             <figure class="polaroid" data-tilt>
               <img src="/img/wafiq-formal.webp" alt="Formal portrait of Wafiq" loading="lazy" width="327" height="415" />
               <figcaption>Trainer mode: ON</figcaption>
             </figure>
-            <div class="orbit" aria-label="Training topics">
-              <div class="orbit__core"><svg data-logo></svg></div>
-              <div class="orbit__ring" data-orbit></div>
-            </div>
-            <div class="ttt">
-              <div class="ttt__seal">HRD<br />Corp</div>
-              <div>
-                <p class="kicker">Professional development</p>
-                <h3>Train-the-Trainer (TTT)</h3>
-                <p>Completed August 2026. Awaiting assessment results &amp; accreditation.</p>
-                <span class="chip chip--live"><span class="pulse"></span>Accreditation pending</span>
-              </div>
-            </div>
           </div>
-          <div class="programmes" data-programmes></div>
-          <div class="trainer__foot">
-            <div class="audience">
+          <div class="trainer__cards" data-programmes></div>
+          <div class="trainer__bottom">
+            <div class="tcard topics">
+              <p class="kicker">What I teach</p>
+              <div class="topics__wrap" data-topics></div>
+            </div>
+            <div class="tcard audience">
               <p class="kicker">Who I’ve trained</p>
               <ul data-audiences></ul>
             </div>
-            <a class="tool-card" data-tool target="_blank" rel="noopener" data-cursor="Open"></a>
+            <a class="tcard tool-card" data-tool target="_blank" rel="noopener" data-cursor="Open"></a>
           </div>
         </div>
       </section>
@@ -217,18 +231,17 @@
           <span class="sec-head__no">03 — journey</span>
           <h2 class="sec-title" data-reveal>From <span class="serif">Kelantan</span> classrooms to <span class="serif">corporate</span> training rooms.</h2>
         </header>
-        <div class="timeline">
-          <svg class="timeline__line" preserveAspectRatio="none" viewBox="0 0 10 100"><path d="M5 0 V100" /></svg>
-          <ol data-journey></ol>
-        </div>
+        <ol class="stack" data-journey></ol>
       </section>
 
       <!-- CREDENTIALS -->
       <section class="creds section" id="creds">
         <header class="sec-head sec-head--split">
-          <span class="sec-head__no">04 — credentials</span>
-          <h2 class="sec-title" data-reveal>Collect them <span class="serif">all.</span></h2>
-          <p class="sec-sub">Tilt the cards. Three AI CERTs® certifications, HRD Corp TTT on the way, plus the workshops that got me here.</p>
+          <div>
+            <span class="sec-head__no">04 — credentials</span>
+            <h2 class="sec-title" data-reveal>Collect them <span class="serif">all.</span></h2>
+          </div>
+          <p class="sec-sub">Tilt the cards. Three AI CERTs® certifications, HRD Corp Train-the-Trainer, plus the workshops that got me here.</p>
         </header>
         <div class="holo-grid" data-certs></div>
       </section>
@@ -256,6 +269,7 @@
 
       <!-- CONTACT -->
       <section class="contact" id="contact">
+        <div class="contact__stage" data-anchor="contact" aria-hidden="true"></div>
         <p class="sec-head__no">07 — say hi</p>
         <h2 class="contact__title" data-bounce>Let’s build something</h2>
         <h2 class="contact__title contact__title--serif serif">(or run a workshop)</h2>
@@ -272,10 +286,16 @@
         <footer class="foot">
           <span>© 2026 Tuan Ahmad Wafiq</span>
           <span>Built with three.js, GSAP &amp; too much teh tarik</span>
-          <a href="#top" data-magnetic>Back to top ↑</a>
         </footer>
       </section>
     </main>
+
+    <!-- Floating back-to-top -->
+    <button class="totop" data-totop aria-label="Back to top">
+      <svg class="totop__progress" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" pathLength="1" /></svg>
+      <svg class="totop__ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="tt" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" /></defs><text><textPath href="#tt">BACK TO TOP ✦ BACK TO TOP ✦ </textPath></text></svg>
+      <span class="totop__core"><span class="totop__arrow">↑</span></span>
+    </button>
 
     <!-- Live preview modal -->
     <div class="modal" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Live preview">
