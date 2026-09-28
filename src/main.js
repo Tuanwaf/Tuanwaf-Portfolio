@@ -219,7 +219,29 @@ function intro() {
   return tl;
 }
 
+// Installed iPhone apps only read the status-bar colour at launch, so a theme toggle there
+// reloads the app. That reload skips the intro and returns to the same scroll position.
+const quickReturn = (() => {
+  try {
+    const v = sessionStorage.getItem('quick-return');
+    sessionStorage.removeItem('quick-return');
+    return v === null ? null : Number(v);
+  } catch { return null; }
+})();
+
 (function loader() {
+  if (quickReturn !== null) {
+    gsap.set('.loader', { display: 'none' });
+    document.body.classList.remove('is-loading');
+    lenis.start();
+    const restore = () => {
+      ScrollTrigger.refresh();
+      lenis.scrollTo(quickReturn, { immediate: true, force: true });
+      window.scrollTo(0, quickReturn);
+    };
+    document.readyState === 'complete' ? restore() : addEventListener('load', restore, { once: true });
+    return;
+  }
   const count = $('[data-count]');
   const path = $('.loader__logo path');
   const len = path.getTotalLength();
@@ -670,6 +692,10 @@ $$('[data-theme-toggle]').forEach((b) => b.addEventListener('click', () => {
   try { localStorage.setItem('theme', next); } catch {}
   syncMeta();
   scene?.setDark(next === 'dark');
+  if (navigator.standalone === true) {
+    try { sessionStorage.setItem('quick-return', String(Math.round(scrollY))); } catch {}
+    setTimeout(() => location.reload(), 250);
+  }
   gsap.fromTo('[data-theme-toggle] svg', { rotate: -120, scale: 0.4 }, { rotate: 0, scale: 1, duration: 0.8, ease: 'back.out(2)' });
 }));
 

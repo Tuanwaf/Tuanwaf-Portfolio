@@ -215,14 +215,14 @@ main, .nav { position: relative; z-index: 2; }
 .menu-open .menu { visibility: visible; pointer-events: auto; }
 .menu__scrim { position: absolute; inset: 0; background: color-mix(in srgb, #16121e 38%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; }
 .menu__panel {
-  --p-bg: #221d31; --p-ink: #f3eefb; --p-mute: #a69fba;
+  --p-bg: var(--card); --p-ink: var(--ink); --p-mute: var(--ink-2); --p-line: var(--line);
   position: absolute; top: calc(env(safe-area-inset-top) + 74px); right: var(--gutter);
   width: min(440px, calc(100vw - 2 * var(--gutter))); max-height: calc(100svh - 96px); overflow: auto;
   background: var(--p-bg); color: var(--p-ink); border-radius: 28px; padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 40px 80px -30px rgba(10, 6, 20, 0.7);
+  border: 1px solid var(--p-line); box-shadow: 0 40px 80px -30px rgba(10, 6, 20, 0.45);
   clip-path: inset(0 0 100% 100% round 28px);
 }
-.menu__head { display: flex; justify-content: space-between; padding: 4px 10px 12px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--p-mute); border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 8px; }
+.menu__head { display: flex; justify-content: space-between; padding: 4px 10px 12px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--p-mute); border-bottom: 1px solid var(--p-line); margin-bottom: 8px; }
 .menu__list { list-style: none; margin: 0; padding: 0; }
 .menu__list li { overflow: hidden; }
 .menu__list a {
@@ -238,8 +238,8 @@ main, .nav { position: relative; z-index: 2; }
 .menu__list a:hover .menu__no { color: var(--on-pastel); }
 .menu__arrow { font-size: 1.2rem; opacity: 0; transform: translateX(-12px); transition: opacity 0.3s, transform 0.4s var(--ease); }
 .menu__list a:hover .menu__arrow { opacity: 1; transform: none; }
-.menu__foot { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 6px 4px; margin-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-.menu__foot a, .menu__foot button { padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.85rem; font-weight: 600; color: var(--p-ink); transition: background-color 0.3s, color 0.3s; }
+.menu__foot { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 6px 4px; margin-top: 8px; border-top: 1px solid var(--p-line); }
+.menu__foot a, .menu__foot button { padding: 8px 14px; border-radius: 99px; border: 1px solid var(--p-line); font-size: 0.85rem; font-weight: 600; color: var(--p-ink); transition: background-color 0.3s, color 0.3s; }
 .menu__foot a:hover, .menu__foot button:hover { background: var(--p-ink); color: var(--p-bg); }
 .menu__foot button[data-install] { background: var(--mint); color: var(--on-pastel); border-color: transparent; }
 
@@ -272,8 +272,7 @@ main, .nav { position: relative; z-index: 2; }
 .hero__main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: 24px; min-height: 0; }
 .hero__title { margin: 0; font-family: var(--display); letter-spacing: -0.06em; line-height: 0.8; display: grid; position: relative; z-index: 1; }
 .hero__line { display: block; }
-.hero__role { display: none; align-items: center; gap: 10px; font-family: var(--mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 14px 0.2em; line-height: 1; }
-.hero__role::before { content: ''; width: 22px; height: 1.5px; background: currentColor; }
+.hero__role { display: none; justify-self: start; align-items: center; font-family: var(--mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin: 0 0 14px; line-height: 1; padding: 7px 12px; border-radius: 99px; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .hero__line--sm { font-size: clamp(36px, 5.6vw, 104px); font-weight: 300; letter-spacing: -0.045em; padding-left: 0.05em; margin-bottom: 0.08em; }
 .hero__line--xl { font-size: clamp(96px, 17.5vw, 330px); font-weight: 800; margin-left: -0.04em; white-space: nowrap; }
 .hero__line--xl .ch { display: inline-block; transform-origin: 50% 100%; font-variation-settings: 'wght' 800, 'opsz' 96; }
