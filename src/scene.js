@@ -142,8 +142,15 @@ export function createScene(canvas, { mobile, reduced }) {
   const timer = new THREE.Timer();
   const tmp = new THREE.Color();
 
+  // Size to the canvas box (100lvh = the viewport with the browser bars hidden), not innerHeight.
+  // On phones the address bar slides in and out while scrolling; innerHeight changes each time,
+  // and re-fitting the scene to it made every object jump. The lvh box stays put, so we only
+  // re-fit when the width really changes (rotation, desktop window resize).
+  let sizeW = 0, sizeH = 0;
   function resize() {
-    const w = window.innerWidth, h = window.innerHeight;
+    const w = canvas.clientWidth || window.innerWidth, h = canvas.clientHeight || window.innerHeight;
+    if (w === sizeW && (mobile || h === sizeH)) return;
+    sizeW = w; sizeH = h;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
@@ -153,7 +160,8 @@ export function createScene(canvas, { mobile, reduced }) {
   window.addEventListener('resize', resize);
 
   window.addEventListener('pointermove', (e) => {
-    pointer.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+    // Only a real mouse steers the parallax; a finger landing would yank everything toward it.
+    if (e.pointerType === 'mouse') pointer.set((e.clientX / sizeW) * 2 - 1, -(e.clientY / sizeH) * 2 + 1);
     if (dragging) { dragVel = (e.clientX - dragX) * 0.01; dragX = e.clientX; dragRot += dragVel; }
   }, { passive: true });
 
@@ -161,7 +169,7 @@ export function createScene(canvas, { mobile, reduced }) {
   const ray = new THREE.Raycaster();
   function hitLogo(e) {
     if (!anchor || logoScale < 0.1) return false;
-    const v = new THREE.Vector2((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+    const v = new THREE.Vector2((e.clientX / sizeW) * 2 - 1, -(e.clientY / sizeH) * 2 + 1);
     ray.setFromCamera(v, camera);
     return ray.intersectObject(logoMesh).length > 0;
   }
@@ -180,7 +188,7 @@ export function createScene(canvas, { mobile, reduced }) {
     const dt = Math.min(timer.getDelta(), 0.05);
     const t = timer.getElapsed();
     smooth.lerp(pointer, 1 - Math.pow(0.001, dt));
-    const W = window.innerWidth, H = window.innerHeight;
+    const W = sizeW, H = sizeH;
     const vh = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
     const vw = vh * camera.aspect;
     const wide = camera.aspect > 1;

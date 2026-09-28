@@ -246,7 +246,12 @@ main, .nav { position: relative; z-index: 2; }
 .hero__status { display: none !important; align-items: center; gap: 8px; }
 .hero__status b { font-weight: 500; color: var(--ink-2); border-left: 1px solid var(--line); padding-left: 8px; }
 @media (max-width: 760px) {
-  .hero__meta { justify-content: flex-start; font-size: 0.66rem; gap: 6px; }
+  /* Phones: status centred on top, portfolio | location, then the role line centred */
+  .hero__meta { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: 'status status' 'folio place' 'role role'; gap: 8px; font-size: 0.66rem; }
+  .hero__meta span:nth-child(1) { grid-area: folio; justify-self: start; }
+  .hero__meta span:nth-child(2) { grid-area: place; justify-self: end; }
+  .hero__meta span:nth-child(3) { grid-area: role; justify-self: center; }
+  .hero__meta .hero__status { grid-area: status; justify-self: center; }
   .hero__status { display: inline-flex !important; }
 }
 .hero__meta span { padding: 7px 12px; border-radius: 99px; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: var(--ink); }
