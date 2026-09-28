@@ -14,7 +14,7 @@ npm run build      # outputs dist/
 npm run preview    # serve the production build (service worker included)
 ```
 
-Pushing to `master` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
+Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 
 ## Where things live
 
