@@ -645,15 +645,25 @@ lenis.on('scroll', ({ scroll }) => nav.classList.toggle('is-scrolled', scroll > 
 })();
 
 /* ───────── theme ───────── */
-const metaTheme = $$('meta[name="theme-color"]');
+let metaTheme = $('#theme-meta');
 function currentTheme() {
   return document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 }
 function syncMeta() {
   const c = currentTheme() === 'dark' ? '#16121E' : '#FFF8F1';
-  metaTheme.forEach((m) => m.setAttribute('content', c));
+  // Replace the tag rather than editing it: iOS standalone apps pick up a new element more reliably.
+  const fresh = metaTheme.cloneNode();
+  fresh.setAttribute('content', c);
+  metaTheme.replaceWith(fresh);
+  metaTheme = fresh;
 }
 syncMeta();
+// Follow the system appearance live while the visitor hasn't picked a theme.
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (document.documentElement.dataset.theme) return;
+  syncMeta();
+  scene?.setDark(currentTheme() === 'dark');
+});
 $$('[data-theme-toggle]').forEach((b) => b.addEventListener('click', () => {
   const next = currentTheme() === 'dark' ? 'light' : 'dark';
   document.documentElement.dataset.theme = next;

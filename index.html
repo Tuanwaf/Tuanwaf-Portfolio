@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Wafiq — Developer, AI Trainer & Game Maker</title>
     <meta name="description" content="Portfolio of Tuan Ahmad Wafiq — web & mobile developer, HRD Corp certified AI trainer at Knowledgecom, and maker of BajetBro, Island of Kail and Noctudite." />
-    <meta name="theme-color" content="#FFF8F1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16121E" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FFF8F1" id="theme-meta" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -20,7 +19,14 @@
     <meta property="og:type" content="website" />
     <script>
       // Apply the saved theme before first paint so there is no flash.
-      try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+      // Also set the status-bar colour now: iOS reads theme-color at load and may ignore later edits.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t) document.documentElement.dataset.theme = t;
+        var dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.getElementById('theme-meta').setAttribute('content', dark ? '#16121E' : '#FFF8F1');
+      })();
     </script>
   </head>
   <body class="is-loading">
