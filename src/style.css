@@ -335,7 +335,7 @@ main, .nav { position: relative; z-index: 2; }
 .record { grid-column: span 7; padding: 0; }
 .record__head { display: flex; justify-content: space-between; gap: 12px; padding: clamp(16px, 1.8vw, 24px) clamp(18px, 2vw, 30px) 0; }
 .record__head .kicker { margin: 0; }
-.record__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.record__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
 .record__cell { display: flex; flex-direction: column; gap: 4px; padding: clamp(18px, 2vw, 28px) clamp(18px, 2vw, 30px) clamp(20px, 2.2vw, 30px); position: relative; }
 .record__cell + .record__cell::before { content: ''; position: absolute; left: 0; top: 22%; bottom: 22%; width: 1px; background: var(--line); }
 .record__num { font-family: var(--serif); font-style: italic; font-size: clamp(46px, 4.6vw, 76px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
